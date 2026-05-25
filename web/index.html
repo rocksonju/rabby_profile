@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RABBYZ — AKM Fazlay Rabby</title>
+<meta name="description" content="AKM Fazlay Rabby — VP &amp; Head of Research &amp; Investment, City Brokerage Limited. 18+ years in Bangladesh capital markets. Automating finance through AI, Python, and data." />
+<meta property="og:title" content="RABBYZ — AKM Fazlay Rabby" />
+<meta property="og:description" content="Capital markets. AI. Data. Dhaka." />
+<meta property="og:url" content="https://rabbyz.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-0: #050606;
+  --bg-1: #0a0c0c;
+  --bg-2: #0f1413;
+  --ink-0: #f4fff7;
+  --ink-1: rgba(244,255,247,0.72);
+  --ink-2: rgba(244,255,247,0.48);
+  --ink-3: rgba(244,255,247,0.28);
+  --line: rgba(244,255,247,0.07);
+  --line-2: rgba(244,255,247,0.13);
+  --glass: rgba(255,255,255,0.03);
+  --glass-2: rgba(255,255,255,0.06);
+  --accent: #00ff88;
+  --accent-soft: rgba(0,255,136,0.15);
+  --accent-glow: rgba(0,255,136,0.5);
+  --accent-dim: rgba(0,255,136,0.08);
+  --font-display: "Syne", system-ui, sans-serif;
+  --font-body: "Syne", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --r: 18px;
+  --section-y: 9rem;
+}
+*{box-sizing:border-box;}
+html,body{
+  margin:0;padding:0;
+  background:var(--bg-0);
+  color:var(--ink-0);
+  font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+::selection{background:var(--accent);color:#000;}
+
+/* atmosphere */
+body::before{
+  content:"";position:fixed;inset:0;
+  background:
+    radial-gradient(70vmax 55vmax at 85% -5%, rgba(0,255,136,0.09), transparent 58%),
+    radial-gradient(60vmax 50vmax at -5% 35%, rgba(0,160,110,0.06), transparent 60%),
+    radial-gradient(50vmax 50vmax at 50% 105%, rgba(0,255,136,0.07), transparent 60%);
+  pointer-events:none;z-index:0;
+}
+body::after{
+  content:"";position:fixed;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size:3px 3px;
+  mix-blend-mode:overlay;opacity:0.4;
+  pointer-events:none;z-index:0;
+}
+main{position:relative;z-index:1;}
+
+/* blob */
+.blob{
+  position:fixed;width:380px;height:380px;border-radius:50%;
+  background:radial-gradient(closest-side, rgba(0,255,136,0.15), transparent);
+  filter:blur(36px);pointer-events:none;z-index:0;
+  transform:translate(-50%,-50%);transition:opacity 0.5s;
+  mix-blend-mode:screen;
+}
+
+/* wrap */
+.wrap{width:min(1200px, 92vw);margin:0 auto;}
+
+/* ── NAV ── */
+nav.topnav{
+  position:fixed;top:18px;left:50%;transform:translateX(-50%);
+  z-index:50;display:flex;align-items:center;gap:0.5rem;
+  padding:8px 10px 8px 18px;border-radius:999px;
+  background:rgba(8,10,10,0.6);border:1px solid var(--line-2);
+  backdrop-filter:blur(28px) saturate(140%);
+  -webkit-backdrop-filter:blur(28px) saturate(140%);
+  box-shadow:0 12px 48px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.07);
+  white-space:nowrap;
+}
+.nav-brand{
+  font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.2em;
+  color:var(--ink-0);display:inline-flex;align-items:center;gap:8px;
+  padding-right:16px;border-right:1px solid var(--line-2);
+}
+.nav-brand .dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 10px var(--accent-glow),0 0 22px var(--accent-glow);
+  animation:pulse 2.4s ease-in-out infinite;
+}
+.nav-links{list-style:none;margin:0;padding:0 4px;display:flex;gap:2px;}
+.nav-links a{
+  font-family:var(--font-body);font-size:13px;color:var(--ink-1);
+  text-decoration:none;padding:7px 12px;border-radius:999px;
+  transition:all 0.2s;
+}
+.nav-links a:hover{color:var(--ink-0);background:var(--glass-2);}
+.nav-cta{
+  background:var(--accent);color:#000 !important;
+  padding:7px 15px !important;font-weight:700 !important;
+  font-size:12.5px !important;
+}
+.nav-cta:hover{background:#5fffaf !important;}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:7rem 1.5rem 6rem;
+  position:relative;overflow:hidden;
+}
+.hero-eyebrow{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:0.32em;
+  text-transform:uppercase;color:var(--ink-2);
+  display:inline-flex;align-items:center;gap:10px;
+  padding:6px 16px;border-radius:999px;
+  border:1px solid var(--line-2);background:var(--glass);
+  backdrop-filter:blur(20px);margin-bottom:2.5rem;
+}
+.hero-eyebrow .live{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 10px var(--accent-glow);
+  animation:pulse 1.6s ease-in-out infinite;
+}
+.wordmark{
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:clamp(76px,17vw,260px);
+  line-height:0.87;letter-spacing:-0.04em;
+  text-align:center;
+  position:relative;
+  user-select:none;
+  display:inline-flex;
+  align-items:baseline;
+  justify-content:center;
+}
+.wordmark .ltr{
+  display:inline-block;
+  background:linear-gradient(175deg,#ffffff 0%,#b0c4bb 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  transition:transform 0.42s cubic-bezier(.2,.8,.2,1);
+  will-change:transform;
+}
+/* the lowercase z — smaller, green, baseline-aligned */
+.wm-z{
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:0.4em;
+  letter-spacing:0;
+  display:inline-block;
+  background:linear-gradient(160deg,#00ff88 0%,#00cc66 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 18px rgba(0,255,136,0.7));
+  vertical-align:baseline;
+  margin-left:0.06em;
+  margin-bottom:-0.08em;
+  transition:transform 0.42s cubic-bezier(.2,.8,.2,1);
+  will-change:transform;
+}
+.hero-sub{
+  margin-top:2.5rem;max-width:520px;
+  text-align:center;font-size:17px;line-height:1.6;
+  color:var(--ink-1);
+}
+.hero-sub em{
+  font-family:var(--font-serif);font-style:italic;color:var(--ink-0);
+}
+.hero-pills{
+  margin-top:3rem;display:flex;gap:1.5rem;flex-wrap:wrap;
+  justify-content:center;
+}
+.hero-pills .pill{
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--ink-2);
+  display:inline-flex;align-items:center;gap:8px;
+}
+.hero-pills .pill::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--ink-3);}
+.hero-ctas{
+  margin-top:2.5rem;display:flex;gap:0.75rem;flex-wrap:wrap;
+  align-items:center;justify-content:center;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 22px;border-radius:999px;font-family:var(--font-body);
+  font-size:14px;font-weight:600;text-decoration:none;
+  transition:all 0.22s ease;cursor:pointer;border:none;
+}
+.btn-primary{background:var(--accent);color:#000;}
+.btn-primary:hover{background:#5fffaf;box-shadow:0 0 28px var(--accent-glow);transform:translateY(-2px);}
+.btn-ghost{
+  background:transparent;color:var(--ink-1);
+  border:1px solid var(--line-2);
+}
+.btn-ghost:hover{color:var(--ink-0);border-color:var(--line-2);background:var(--glass-2);transform:translateY(-2px);}
+.scroll-hint{
+  position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);
+  font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.3em;
+  text-transform:uppercase;color:var(--ink-3);
+  display:flex;flex-direction:column;align-items:center;gap:9px;text-decoration:none;
+}
+.scroll-hint::after{content:"";width:1px;height:30px;background:linear-gradient(to bottom,var(--ink-3),transparent);}
+
+/* ── MARQUEE ── */
+.marquee{
+  overflow:hidden;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:1.1rem 0;margin-top:var(--section-y);
+}
+.marquee-track{
+  display:flex;gap:3.5rem;width:max-content;
+  animation:marquee 34s linear infinite;
+  white-space:nowrap;
+}
+.marquee-track span{
+  font-family:var(--font-display);
+  font-size:clamp(26px,3.8vw,52px);
+  color:var(--ink-3);letter-spacing:-0.02em;
+  display:inline-flex;align-items:center;gap:3.5rem;
+}
+.marquee-track span::after{content:"✦";color:var(--accent);font-size:0.55em;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ── SECTIONS ── */
+.section{padding-top:var(--section-y);}
+.section-label{
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.3em;
+  text-transform:uppercase;color:var(--accent);
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:1.25rem;
+}
+.section-label::before{content:"";display:block;width:20px;height:1px;background:var(--accent);opacity:0.5;}
+.section-h{
+  font-family:var(--font-display);font-weight:700;
+  font-size:clamp(32px,4.5vw,56px);
+  letter-spacing:-0.03em;line-height:1.05;
+  color:var(--ink-0);margin:0 0 1.5rem;
+}
+.rule{height:1px;background:linear-gradient(90deg,transparent,var(--line-2),transparent);margin:0 auto;width:100%;}
+
+/* ── ABOUT ── */
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;
+  align-items:start;
+}
+@media(max-width:720px){.about-grid{grid-template-columns:1fr;gap:2.5rem;}}
+.about-text p{font-size:17px;line-height:1.72;color:var(--ink-1);margin:0 0 1.25rem;}
+.about-text p:last-child{margin-bottom:0;}
+.about-text strong{color:var(--ink-0);font-weight:600;}
+.about-text em{font-family:var(--font-serif);font-style:italic;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border-radius:var(--r);overflow:hidden;}
+.stat{
+  background:var(--bg-1);padding:1.5rem 1.25rem;
+}
+.stat .n{
+  font-family:var(--font-display);font-weight:800;
+  font-size:clamp(36px,5vw,52px);letter-spacing:-0.04em;
+  background:linear-gradient(135deg,var(--accent),#00b360);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;line-height:1;
+}
+.stat .l{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--ink-2);margin-top:0.5rem;
+}
+
+/* ── TIMELINE / CAREER ── */
+.timeline{position:relative;display:flex;flex-direction:column;gap:0;}
+.timeline::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;
+  width:1px;background:linear-gradient(to bottom,transparent,var(--line-2) 10%,var(--line-2) 90%,transparent);
+}
+.tl-item{
+  padding-left:2.5rem;padding-bottom:2.5rem;position:relative;
+}
+.tl-item:last-child{padding-bottom:0;}
+.tl-dot{
+  position:absolute;left:-5px;top:4px;
+  width:11px;height:11px;border-radius:50%;
+  background:var(--bg-0);border:2px solid var(--line-2);
+  transition:border-color 0.25s;
+}
+.tl-item:hover .tl-dot{border-color:var(--accent);}
+.tl-item.current .tl-dot{background:var(--accent);border-color:var(--accent);box-shadow:0 0 10px var(--accent-glow);}
+.tl-date{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:0.35rem;
+}
+.tl-role{
+  font-family:var(--font-display);font-weight:700;font-size:16px;
+  color:var(--ink-0);margin:0 0 0.2rem;
+}
+.tl-org{
+  font-size:14px;color:var(--accent);margin-bottom:0.5rem;
+  font-weight:600;letter-spacing:0.01em;
+}
+.tl-desc{font-size:14px;color:var(--ink-2);line-height:1.6;}
+
+/* ── PROJECTS ── */
+.project-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border-radius:var(--r);overflow:hidden;}
+@media(max-width:720px){.project-grid{grid-template-columns:1fr;}}
+.project-card{
+  background:var(--bg-1);padding:2rem 1.75rem;
+  position:relative;overflow:hidden;
+  transition:background 0.25s;
+}
+.project-card:hover{background:rgba(0,255,136,0.04);}
+.project-card::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(60% 60% at 0% 0%,rgba(0,255,136,0.06),transparent);
+  opacity:0;transition:opacity 0.3s;
+}
+.project-card:hover::before{opacity:1;}
+.project-tag{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--accent);
+  display:inline-block;margin-bottom:1rem;
+}
+.project-title{
+  font-family:var(--font-display);font-weight:700;
+  font-size:clamp(18px,2.5vw,24px);color:var(--ink-0);
+  letter-spacing:-0.02em;margin:0 0 0.75rem;
+  line-height:1.15;
+}
+.project-val{
+  font-family:var(--font-display);font-weight:800;
+  font-size:clamp(30px,4vw,44px);letter-spacing:-0.04em;
+  background:linear-gradient(135deg,var(--accent),#00b360);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  display:block;line-height:1;margin-bottom:0.75rem;
+}
+.project-desc{font-size:14px;color:var(--ink-2);line-height:1.65;}
+.project-meta{
+  margin-top:1.25rem;display:flex;flex-wrap:wrap;gap:0.5rem;
+}
+.tag{
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--ink-3);
+  padding:4px 10px;border-radius:999px;
+  border:1px solid var(--line-2);
+}
+
+/* ── NOW / FOCUS ── */
+.focus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border-radius:var(--r);overflow:hidden;}
+@media(max-width:860px){.focus-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.focus-grid{grid-template-columns:1fr;}}
+.focus-card{
+  background:var(--bg-1);padding:1.75rem 1.5rem;
+  transition:background 0.22s;
+}
+.focus-card:hover{background:rgba(0,255,136,0.04);}
+.focus-icon{
+  font-size:26px;display:block;margin-bottom:1rem;
+  filter:saturate(0) brightness(2);transition:filter 0.25s;
+}
+.focus-card:hover .focus-icon{filter:none;}
+.focus-name{
+  font-family:var(--font-display);font-weight:700;
+  font-size:16px;color:var(--ink-0);margin:0 0 0.5rem;
+}
+.focus-detail{font-size:13.5px;color:var(--ink-2);line-height:1.6;}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:4rem;align-items:start;}
+@media(max-width:720px){.contact-grid{grid-template-columns:1fr;gap:2.5rem;}}
+.contact-h{
+  font-family:var(--font-display);font-weight:800;
+  font-size:clamp(38px,6vw,72px);letter-spacing:-0.04em;
+  line-height:1;color:var(--ink-0);margin:0 0 1.25rem;
+}
+.contact-h .hl{
+  background:linear-gradient(135deg,var(--accent),#00d470);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.contact-sub{font-size:16px;color:var(--ink-1);line-height:1.65;max-width:400px;}
+.contact-email{
+  display:inline-block;margin-top:2rem;
+  font-family:var(--font-display);font-weight:700;
+  font-size:clamp(15px,2.2vw,20px);color:var(--accent);
+  text-decoration:none;letter-spacing:0.01em;
+  border-bottom:1px solid var(--accent-soft);padding-bottom:4px;
+  transition:all 0.2s;
+}
+.contact-email:hover{filter:drop-shadow(0 0 18px var(--accent-glow));}
+.contact-links{display:flex;flex-direction:column;gap:1px;background:var(--line);border-radius:var(--r);overflow:hidden;}
+.contact-links a{
+  background:rgba(8,10,10,0.65);padding:1rem 1.25rem;
+  color:var(--ink-1);text-decoration:none;
+  font-family:var(--font-mono);font-size:13px;letter-spacing:0.05em;
+  display:flex;justify-content:space-between;align-items:center;
+  transition:all 0.2s;
+}
+.contact-links a:hover{background:rgba(0,255,136,0.05);color:var(--accent);padding-left:1.6rem;}
+.contact-links a span:last-child{color:var(--ink-3);}
+.contact-links a:hover span:last-child{color:var(--accent);}
+
+/* NexTor cards — subtle accent tint */
+.project-card.nextor{background:linear-gradient(135deg,var(--bg-1) 0%,rgba(0,255,136,0.04) 100%);}
+.project-card.nextor .project-val{font-size:clamp(28px,3.8vw,42px);}
+
+/* ── FOOTER ── */
+footer{
+  padding:2rem 0 3rem;border-top:1px solid var(--line);
+  margin-top:var(--section-y);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:1rem;
+  font-family:var(--font-mono);font-size:11px;
+  color:var(--ink-3);letter-spacing:0.1em;text-transform:uppercase;
+}
+footer .footer-mark{color:var(--ink-1);}
+footer .live-row{display:inline-flex;align-items:center;gap:8px;}
+footer .blink{
+  width:6px;height:6px;background:var(--accent);border-radius:50%;
+  box-shadow:0 0 8px var(--accent-glow);animation:pulse 1.2s ease-in-out infinite;
+}
+
+/* ── KEYFRAMES ── */
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.76);}}
+@keyframes fadeup{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+
+/* entry animations */
+.fadeup{animation:fadeup 0.7s cubic-bezier(.2,.8,.3,1) both;}
+.fadeup:nth-child(1){animation-delay:.05s;}
+.fadeup:nth-child(2){animation-delay:.12s;}
+.fadeup:nth-child(3){animation-delay:.2s;}
+.fadeup:nth-child(4){animation-delay:.28s;}
+.fadeup:nth-child(5){animation-delay:.36s;}
+
+/* intersection fade */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .nav-links li:not(:last-child){display:none;}
+  .hero-ctas{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<!-- ambient blob -->
+<div class="blob" id="blob"></div>
+
+<!-- NAV -->
+<nav class="topnav">
+  <span class="nav-brand"><span class="dot"></span>RABBYZ</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#now">Now</a></li>
+    <li><a href="mailto:rabby@rabbyz.com" class="btn nav-cta">Say hi →</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-eyebrow fadeup"><span class="live"></span>Dhaka, Bangladesh · Capital Markets &amp; AI</span>
+    <div class="wordmark fadeup" id="wm" aria-label="RABBYZ">
+      <span class="ltr">R</span><span class="ltr">A</span><span class="ltr">B</span><span class="ltr">B</span><span class="ltr">Y</span><span class="wm-z">z</span>
+    </div>
+    <p class="hero-sub fadeup">
+      <em>~</em> 18 years of grinding in Bangladesh's capital markets —
+      from product development to block deals and portfolio desks to digital trading platforms and Research to Innovation to Strategies...
+      Now: <strong>building FINTECH solutions to Democratize Capital Markets of Bangladesh
+      </strong> through code and passion.
+    </p>
+    <div class="hero-pills fadeup">
+      <span class="pill">FVP &amp; Head of Research & Investment </span>
+      <span class="pill"> Project Management </span>
+      <span class="pill">  Capital Market Regulations</span>
+      <span class="pill">Interests:Python · Power BI · LLMs · Automation</span>
+    </div>
+    <div class="hero-ctas fadeup">
+      <a href="#projects" class="btn btn-primary">See my work →</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+    <a href="#about" class="scroll-hint">scroll</a>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee reveal">
+    <div class="marquee-track">
+      <span>Capital Markets</span>
+      <span>Investment Research</span>
+      <span>Deal Structuring</span>
+      <span>AI for Finance</span>
+      <span>Python Automation</span>
+      <span>BSEC ·DSE · CSE</span>
+      <span>Bangladesh Bank</span>
+      <span>NexTor · NexTor 2.0</span>
+      <!-- duplicate for seamless loop -->
+      <span>Capital Markets</span>
+      <span>Investment Research</span>
+      <span>Data Engineering</span>
+      <span>AI for Finance</span>
+      <span>Python Automation</span>
+      <span>DSE · CSE</span>
+      <span>Bangladesh Bank</span>
+      <span>NexTor</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-label">About</div>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>
+            I'm <strong>AKM Fazlay Rabby</strong> — First Vice President (FVP) &amp; Head of Research and Investment at
+            <strong>City Brokerage Limited</strong>. I've spent nearly one and a half decades across Bangladesh's
+            capital markets: research, portfolio management, banking, and now — the intersection
+            of <em>markets and machines.</em>
+          </p>
+          <p>
+            My edge has always been treating the market as a <strong>data problem</strong>:
+            building frameworks others trust, surfacing signals others miss, and delivering
+            analysis that moves decisions — not just decks.
+          </p>
+          <p>
+            Today I lead a team of research analysts while driving a parallel agenda:
+            <strong>automating the workflows</strong> that still run on spreadsheets and gut feel —
+            using Python, AI, and serious data infrastructure.
+          </p>
+          <p>
+            BBA from North South University. MBA (Finance) from University of Dhaka.
+          </p>
+        </div>
+        <div class="reveal" style="animation-delay:0.1s">
+          <div class="stat-grid">
+            <div class="stat">
+              <div class="n">18+</div>
+              <div class="l">Years in<br>Capital Markets</div>
+            </div>
+            <div class="stat">
+              <div class="n">$484M</div>
+              <div class="l">Largest Deal<br>Led on DSE</div>
+            </div>
+            <div class="stat">
+              <div class="n">2,500+</div>
+              <div class="l">Students in<br>NexTor Series</div>
+            </div>
+            <div class="stat">
+              <div class="n">1st</div>
+              <div class="l">Dual-Exchange<br>Trading App in BD</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap" style="margin-top:var(--section-y)"><div class="rule"></div></div>
+
+  <!-- CAREER -->
+  <section class="section" id="career">
+    <div class="wrap">
+      <div class="section-label">Career</div>
+      <h2 class="section-h reveal">Eighteen years,<br>four institutions.</h2>
+      <div class="timeline reveal">
+        <div class="tl-item current">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2018 — Present</div>
+          <div class="tl-role">First Vice President (FVP) · Head of Research &amp; Investment · Head of Strategic Planning</div>
+          <div class="tl-org">City Brokerage Limited (CBL)</div>
+          <div class="tl-desc">
+            Lead investment research and portfolio strategy. Architected the firm's digital transformation agenda —
+            including the country's first dual-exchange trading app. Manage a team of analysts covering equities, fixed income, and macro.
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2014 — 2018</div>
+          <div class="tl-role">Head of Capital Markets</div>
+          <div class="tl-org">NRB Bank PLC</div>
+          <div class="tl-desc">
+            Ran the capital markets desk from the banking side —
+            treasury operations, investment portfolio, regulatory compliance under Bangladesh Bank's RBCA framework.
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2010 — 2014</div>
+          <div class="tl-role">Head of Portfolio Management</div>
+          <div class="tl-org">AB Investment Limited</div>
+          <div class="tl-desc">
+            Managed discretionary and advisory portfolios. Built research infrastructure from scratch.
+            Developed house equity valuation models still in use today.
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2008 — 2010</div>
+          <div class="tl-role">Management Trainee Officer</div>
+          <div class="tl-org">AB Bank PLC</div>
+          <div class="tl-desc">
+            Foundation rotations across corporate banking, trade finance, and treasury.
+            Where the obsession with financial data started.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap" style="margin-top:var(--section-y)"><div class="rule"></div></div>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="section-label">Landmark Work</div>
+      <h2 class="section-h reveal">Deals, platforms,<br>and a movement.</h2>
+      <div class="project-grid reveal">
+        <div class="project-card">
+          <span class="project-tag">2020 · M&amp;A Transaction</span>
+          <h3 class="project-title">Unilever acquires GSK Bangladesh</h3>
+          <span class="project-val">$484M</span>
+          <p class="project-desc">
+            Bangladesh's largest capital market transaction executed on the Dhaka Stock Exchange.
+            Led the deal as the country's top-ranked brokerage, handling the block trade mechanics,
+            regulatory filing, and settlement coordination for a transaction that set a DSE record and
+            rewrote what local brokers could execute.
+          </p>
+          <div class="project-meta">
+            <span class="tag">DSE Block Deal</span>
+            <span class="tag">M&amp;A Advisory</span>
+            <span class="tag">Regulatory</span>
+            <span class="tag">Record Transaction</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <span class="project-tag">2022 · Fintech Platform</span>
+          <h3 class="project-title">CityInfinity — Dual-Exchange Trading App</h3>
+          <span class="project-val">First.</span>
+          <p class="project-desc">
+            Led as Project Manager on CBL's side — the country's first broker-hosted OMS implementation
+            paired with a fully integrated digital trading app covering both DSE and CSE.
+            Shipped on mobile, web, and desktop. Re-platformed how retail and institutional clients
+            interact with the exchange, from order routing to portfolio analytics.
+          </p>
+          <div class="project-meta">
+            <span class="tag">OMS Integration</span>
+            <span class="tag">Project Management</span>
+            <span class="tag">DSE + CSE</span>
+            <span class="tag">Fintech</span>
+            <span class="tag">Mobile + Web</span>
+          </div>
+        </div>
+        <div class="project-card nextor">
+          <span class="project-tag">Annual · Education &amp; Capital Markets</span>
+          <h3 class="project-title">NexTor — Inter-University Investment Competition</h3>
+          <span class="project-val">2,500+</span>
+          <p class="project-desc">
+            Bangladesh's first nationwide, real-time inter-university investment simulation competition —
+            conceptualised and driven under CBL's banner. University students compete live on actual
+            market data, making buy/sell decisions in real time under competitive pressure.
+            Built to bridge the gap between academia and the capital market, and grow the next
+            generation of Bangladesh's investor base from campus up.
+          </p>
+          <div class="project-meta">
+            <span class="tag">30+ Universities</span>
+            <span class="tag">2,500+ Students</span>
+            <span class="tag">Live Market Data</span>
+            <span class="tag">Nationwide</span>
+          </div>
+        </div>
+        <div class="project-card nextor">
+          <span class="project-tag">Sequel · Scale &amp; Impact</span>
+          <h3 class="project-title">NexTor 2.0 — Bigger. Broader. Live.</h3>
+          <span class="project-val">30+</span>
+          <p class="project-desc">
+            The second edition of NexTor — expanded reach, sharper execution, and deeper market
+            integration. NexTor 2.0 scaled to cover more universities across Bangladesh,
+            refined the real-time trading simulation engine, and elevated the competition format
+            to make it the defining annual capital market event for university students nationally.
+            The mission: make investing a campus culture, not a post-graduation discovery.
+          </p>
+          <div class="project-meta">
+            <span class="tag">Universities</span>
+            <span class="tag">NexTor Series</span>
+            <span class="tag">Real-Time Simulation</span>
+            <span class="tag">BD Capital Markets</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap" style="margin-top:var(--section-y)"><div class="rule"></div></div>
+
+  <!-- NOW -->
+  <section class="section" id="now">
+    <div class="wrap">
+      <div class="section-label">Now</div>
+      <h2 class="section-h reveal">What I'm building<br>toward.</h2>
+      <div class="focus-grid reveal">
+        <div class="focus-card">
+          <span class="focus-icon">🤖</span>
+          <div class="focus-name">AI for Finance</div>
+          <div class="focus-detail">Deploying LLMs across research workflows — earnings summaries, regulatory parsing, analyst augmentation. Real applications, not demos.</div>
+        </div>
+        <div class="focus-card">
+          <span class="focus-icon">🐍</span>
+          <div class="focus-name">Python Automation</div>
+          <div class="focus-detail">Systematically replacing manual Excel workflows with Python pipelines: data ingestion, transformation, reporting — all reproducible and scheduled.</div>
+        </div>
+        <div class="focus-card">
+          <span class="focus-icon">📊</span>
+          <div class="focus-name">Power BI Dashboards</div>
+          <div class="focus-detail">Building live intelligence layers over market data, portfolio positions, and regulatory capital metrics — decision-grade, not decoration.</div>
+        </div>
+        <div class="focus-card">
+          <span class="focus-icon">🏦</span>
+          <div class="focus-name">Regulatory Analytics</div>
+          <div class="focus-detail">Deep work on Bangladesh Bank's RBCA / Basel III capital adequacy framework — CRAR modeling, risk-weight schedules, and capital impact simulation.</div>
+        </div>
+        <div class="focus-card">
+          <span class="focus-icon">📱</span>
+          <div class="focus-name">Digital Capital Markets</div>
+          <div class="focus-detail">Pushing the frontier of what retail and institutional investors in BD can access digitally — from OMS to real-time analytics to mobile-first UX.</div>
+        </div>
+        <div class="focus-card">
+          <span class="focus-icon">🔗</span>
+          <div class="focus-name">Data Pipelines</div>
+          <div class="focus-detail">End-to-end data infrastructure: clean sources, scheduled ETL, typed schemas, and reliable outputs that analysts actually trust and use.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap" style="margin-top:var(--section-y)"><div class="rule"></div></div>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="section-label">Contact</div>
+      <div class="contact-grid">
+        <div class="reveal">
+          <h2 class="contact-h">Let's talk<br><span class="hl">markets.</span></h2>
+          <p class="contact-sub">
+            I'm always open to conversations about capital markets, fintech, AI in finance,
+            or anything data-driven. Based in Dhaka — available globally.
+          </p>
+          <a href="mailto:rabby@rabbyz.com" class="contact-email">rabby@rabbyz.com</a>
+        </div>
+        <div class="reveal" style="animation-delay:0.1s">
+          <div class="contact-links">
+            <a href="https://linkedin.com/in/rabbyfazlay" target="_blank" rel="noopener">
+              <span>LinkedIn</span>
+              <span>↗</span>
+            </a>
+            <a href="https://twitter.com/" target="_blank" rel="noopener">
+              <span>X / Twitter</span>
+              <span>↗</span>
+            </a>
+            <a href="https://github.com/rocksonju" target="_blank" rel="noopener">
+              <span>GitHub</span>
+              <span>↗</span>
+            </a>
+            <a href="mailto:rabby.fazlay@rabbyz.com">
+              <span>Email</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="wrap">
+    <footer class="reveal">
+      <span class="footer-mark">RABBYZ © 2026</span>
+      <span class="live-row"><span class="blink"></span>Dhaka, Bangladesh · GMT+6</span>
+      <span>rabbyz.com</span>
+    </footer>
+  </div>
+
+</main>
+
+<script>
+// kinetic wordmark letters
+const wm = document.getElementById('wm');
+if(wm){
+  const ltrs = wm.querySelectorAll('.ltr');
+  ltrs.forEach((el,i) => {
+    el.addEventListener('mouseenter', () => {
+      el.style.transform = `translateY(${(i%2===0?-1:1)*14}px) rotate(${(i%3-1)*4}deg)`;
+    });
+    el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+  });
+  const z = wm.querySelector('.wm-z');
+  if(z){
+    z.addEventListener('mouseenter', () => { z.style.transform = 'translateY(-8px) scale(1.2)'; });
+    z.addEventListener('mouseleave', () => { z.style.transform = ''; });
+  }
+}
+
+// ambient blob
+const blob = document.getElementById('blob');
+let bx = window.innerWidth/2, by = window.innerHeight/2, tx = bx, ty = by;
+window.addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; });
+(function tick(){
+  bx += (tx-bx)*0.075;
+  by += (ty-by)*0.075;
+  blob.style.left = bx+'px';
+  blob.style.top = by+'px';
+  requestAnimationFrame(tick);
+})();
+
+// intersection reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, {threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}); }
+  });
+});
+</script>
+</body>
+</html>
