@@ -989,6 +989,74 @@
 
       .hero-ctas {
         flex-direction: column;
+        align-items: stretch;
+        width: min(320px, 90vw);
+      }
+
+      .btn {
+        justify-content: center;
+      }
+    }
+
+    /* iPhone 16 Pro (393px) · Pro Max (430px) */
+    @media(max-width:430px) {
+      :root {
+        --section-y: 5rem;
+      }
+
+      /* blob has no touch tracking — skip the paint */
+      .blob {
+        display: none;
+      }
+
+      /* iOS Safari address bar eats 100vh — use svh */
+      .hero {
+        min-height: 100svh;
+        padding: 5rem 1.25rem 4rem;
+      }
+
+      .hero-eyebrow {
+        font-size: 9.5px;
+        letter-spacing: 0.18em;
+        padding: 5px 12px;
+      }
+
+      .hero-sub {
+        font-size: 15px;
+        margin-top: 1.75rem;
+      }
+
+      .hero-pills {
+        gap: 0.75rem;
+        margin-top: 1.75rem;
+      }
+
+      .hero-ctas {
+        margin-top: 1.75rem;
+      }
+
+      .about-text p {
+        font-size: 15px;
+        line-height: 1.65;
+      }
+
+      .section-h {
+        font-size: clamp(26px, 7.5vw, 34px);
+      }
+
+      .project-card {
+        padding: 1.5rem 1.25rem;
+      }
+
+      .focus-card {
+        padding: 1.25rem 1rem;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 1.5rem 0 2.5rem;
       }
     }
   </style>
