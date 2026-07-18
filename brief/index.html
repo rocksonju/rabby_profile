@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Market Brief — RABBYZ</title>
+  <meta name="description" content="Bangladesh capital-market morning & evening briefs — DSE updates, macro, money market, companies and regulatory headlines." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg-0: #050606;
+      --bg-1: #0a0c0c;
+      --bg-2: #0f1413;
+      --ink-0: #f4fff7;
+      --ink-1: rgba(244, 255, 247, 0.72);
+      --ink-2: rgba(244, 255, 247, 0.48);
+      --ink-3: rgba(244, 255, 247, 0.28);
+      --accent: #00ff88;
+      --accent-soft: rgba(0, 255, 136, 0.15);
+      --accent-glow: rgba(0, 255, 136, 0.5);
+      --accent-dim: rgba(0, 255, 136, 0.08);
+      --line: rgba(244, 255, 247, 0.09);
+      --font-display: "Syne", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, monospace;
+      --r: 18px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-0);
+      color: var(--ink-0);
+      font-family: var(--font-display);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: var(--accent); color: #050606; }
+
+    /* ---------- top nav ---------- */
+    nav.topnav {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem clamp(1.2rem, 4vw, 3rem);
+      background: rgba(5, 6, 6, 0.82);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-brand {
+      font-family: var(--font-mono);
+      font-size: 0.95rem; font-weight: 600; letter-spacing: 0.12em;
+      color: var(--ink-0); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-brand .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent-glow), 0 0 22px var(--accent-glow);
+    }
+    .nav-back {
+      font-family: var(--font-mono); font-size: 0.78rem;
+      color: var(--ink-1); text-decoration: none;
+      padding: 0.45rem 0.9rem; border: 1px solid var(--line); border-radius: 999px;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .nav-back:hover { color: var(--accent); border-color: var(--accent-soft); background: var(--accent-dim); }
+
+    /* ---------- header ---------- */
+    header.page-head {
+      max-width: 1100px; margin: 0 auto;
+      padding: clamp(2.2rem, 5vw, 3.6rem) clamp(1.2rem, 4vw, 3rem) 0.6rem;
+    }
+    .kicker {
+      font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.32em;
+      text-transform: uppercase; color: var(--ink-2);
+      display: inline-flex; align-items: center; gap: 0.6rem;
+    }
+    .kicker::before {
+      content: ""; width: 22px; height: 1px; background: var(--accent);
+      box-shadow: 0 0 8px var(--accent-glow); display: inline-block;
+    }
+    h1.title {
+      font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 800;
+      letter-spacing: -0.02em; margin-top: 0.7rem;
+    }
+    h1.title em { font-style: normal; color: var(--accent); text-shadow: 0 0 24px var(--accent-glow); }
+    .subtitle { color: var(--ink-1); font-size: 0.95rem; margin-top: 0.6rem; max-width: 60ch; }
+
+    /* ---------- controls ---------- */
+    .controls {
+      max-width: 1100px; margin: 0 auto;
+      padding: 1.4rem clamp(1.2rem, 4vw, 3rem) 1.2rem;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem;
+    }
+    .ctl-label {
+      font-family: var(--font-mono); font-size: 0.68rem;
+      letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-2);
+    }
+    select#dateSelect {
+      appearance: none; -webkit-appearance: none;
+      background: var(--bg-2) url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2300ff88' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 0.9rem center;
+      color: var(--ink-0);
+      font-family: var(--font-mono); font-size: 0.85rem;
+      padding: 0.6rem 2.4rem 0.6rem 1rem;
+      border: 1px solid var(--line); border-radius: 12px;
+      cursor: pointer; outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    select#dateSelect:hover, select#dateSelect:focus {
+      border-color: var(--accent-soft);
+      box-shadow: 0 0 0 3px var(--accent-dim);
+    }
+    select#dateSelect option { background: var(--bg-2); color: var(--ink-0); }
+
+    .toggle {
+      display: inline-flex; border: 1px solid var(--line);
+      border-radius: 999px; overflow: hidden; background: var(--bg-1);
+    }
+    .toggle button {
+      font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em;
+      background: transparent; color: var(--ink-1);
+      border: 0; padding: 0.6rem 1.25rem; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .toggle button .ico { font-size: 0.85rem; line-height: 1; }
+    .toggle button.active {
+      background: var(--accent); color: #050606; font-weight: 600;
+    }
+    .toggle button:disabled {
+      color: var(--ink-3); cursor: not-allowed;
+    }
+    .toggle button:not(.active):not(:disabled):hover { color: var(--accent); }
+
+    .meta-pill {
+      margin-left: auto;
+      font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em;
+      color: var(--ink-2);
+      border: 1px dashed var(--line); border-radius: 999px;
+      padding: 0.45rem 0.95rem;
+    }
+    .meta-pill b { color: var(--accent); font-weight: 500; }
+
+    /* ---------- viewer ---------- */
+    .viewer-wrap {
+      max-width: 1100px; margin: 0 auto 4rem;
+      padding: 0 clamp(1.2rem, 4vw, 3rem);
+    }
+    .viewer-frame {
+      border: 1px solid var(--line); border-radius: var(--r);
+      overflow: hidden; background: #0b0e14;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+    }
+    .viewer-bar {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.1rem;
+      background: var(--bg-1); border-bottom: 1px solid var(--line);
+    }
+    .viewer-bar .led { width: 9px; height: 9px; border-radius: 50%; background: var(--ink-3); }
+    .viewer-bar .led.g { background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
+    .viewer-bar .path {
+      margin-left: 0.5rem;
+      font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-2);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    iframe#briefFrame {
+      display: block; width: 100%; border: 0;
+      min-height: 70vh; background: #0b0e14;
+    }
+    .empty-state {
+      padding: 5rem 2rem; text-align: center;
+      font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-2);
+      display: none;
+    }
+    .empty-state.show { display: block; }
+    .empty-state .big { font-size: 2rem; display: block; margin-bottom: 0.8rem; }
+
+    footer.foot {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 clamp(1.2rem, 4vw, 3rem) 3rem;
+      font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-3);
+      letter-spacing: 0.06em;
+    }
+    footer.foot a { color: var(--ink-2); text-decoration: none; }
+    footer.foot a:hover { color: var(--accent); }
+
+    @media (max-width: 700px) {
+      .meta-pill { margin-left: 0; }
+      .controls { gap: 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="topnav">
+    <a class="nav-brand" href="/"><span class="dot"></span>RABBYZ</a>
+    <a class="nav-back" href="/">&larr; back to portfolio</a>
+  </nav>
+
+  <header class="page-head">
+    <span class="kicker">Bangladesh Updates</span>
+    <h1 class="title">Capital Market <em>Brief</em></h1>
+    <p class="subtitle">
+      Twice-daily Bangladesh capital-market intelligence — DSE session recap, macro,
+      money market, companies &amp; regulatory headlines. Pick a date, flip between
+      the morning and evening editions.
+    </p>
+  </header>
+
+  <div class="controls">
+    <span class="ctl-label">Date</span>
+    <select id="dateSelect" aria-label="Select brief date"></select>
+
+    <span class="ctl-label">Edition</span>
+    <div class="toggle" role="group" aria-label="Edition">
+      <button id="btnMorning" type="button"><span class="ico">&#9728;</span>Morning</button>
+      <button id="btnEvening" type="button"><span class="ico">&#9789;</span>Evening</button>
+    </div>
+
+    <span class="meta-pill" id="metaPill">loading&hellip;</span>
+  </div>
+
+  <div class="viewer-wrap">
+    <div class="viewer-frame">
+      <div class="viewer-bar">
+        <span class="led g"></span><span class="led"></span><span class="led"></span>
+        <span class="path" id="framePath">briefs/&hellip;</span>
+      </div>
+      <iframe id="briefFrame" title="Market brief" loading="lazy"></iframe>
+      <div class="empty-state" id="emptyState">
+        <span class="big">&#8709;</span>
+        <span id="emptyMsg">No brief found for this date / edition.</span>
+      </div>
+    </div>
+  </div>
+
+  <footer class="foot">
+    &copy; <span id="yr"></span> AKM FAZLAY RABBY &middot; auto-published from the
+    Bangladesh Updates pipeline &middot; <a href="/">rabbyz.com</a>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+      var briefs = [];            // [{date, edition, file}]
+      var byDate = {};            // date -> {morning: file, evening: file}
+      var state = { date: null, edition: null };
+
+      var sel = document.getElementById("dateSelect");
+      var btnM = document.getElementById("btnMorning");
+      var btnE = document.getElementById("btnEvening");
+      var frame = document.getElementById("briefFrame");
+      var framePath = document.getElementById("framePath");
+      var metaPill = document.getElementById("metaPill");
+      var emptyState = document.getElementById("emptyState");
+      var emptyMsg = document.getElementById("emptyMsg");
+      document.getElementById("yr").textContent = new Date().getFullYear();
+
+      function fmtDate(iso) {
+        var d = new Date(iso + "T00:00:00");
+        return d.toLocaleDateString("en-GB", {
+          weekday: "short", day: "2-digit", month: "short", year: "numeric"
+        });
+      }
+
+      function setPill(edition, dateText) {
+        // build with DOM methods (no innerHTML)
+        metaPill.textContent = "";
+        var b = document.createElement("b");
+        b.textContent = edition.toUpperCase();
+        metaPill.appendChild(b);
+        metaPill.appendChild(document.createTextNode(" · " + dateText));
+      }
+
+      function render() {
+        var editions = byDate[state.date] || {};
+        btnM.disabled = !editions.morning;
+        btnE.disabled = !editions.evening;
+        btnM.classList.toggle("active", state.edition === "morning");
+        btnE.classList.toggle("active", state.edition === "evening");
+
+        var file = editions[state.edition];
+        if (file) {
+          frame.style.display = "block";
+          emptyState.classList.remove("show");
+          frame.src = "/briefs/" + encodeURIComponent(file);
+          framePath.textContent = "briefs/" + file;
+          setPill(state.edition, fmtDate(state.date));
+        } else {
+          frame.style.display = "none";
+          frame.removeAttribute("src");
+          emptyState.classList.add("show");
+          emptyMsg.textContent = "No " + state.edition + " edition for this date.";
+          framePath.textContent = "briefs/—";
+          metaPill.textContent = "no " + state.edition + " edition";
+        }
+        var url = new URL(window.location);
+        url.searchParams.set("date", state.date);
+        url.searchParams.set("edition", state.edition);
+        history.replaceState(null, "", url);
+      }
+
+      function setDate(date, preferredEdition) {
+        state.date = date;
+        var editions = byDate[date] || {};
+        if (preferredEdition && editions[preferredEdition]) {
+          state.edition = preferredEdition;
+        } else if (editions[state.edition]) {
+          // keep current edition if it exists for this date
+        } else {
+          state.edition = editions.evening ? "evening" : "morning";
+        }
+        sel.value = date;
+        render();
+      }
+
+      // auto-resize iframe to its content (same-origin)
+      frame.addEventListener("load", function () {
+        try {
+          var doc = frame.contentDocument || frame.contentWindow.document;
+          var h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
+          if (h > 200) frame.style.height = (h + 40) + "px";
+        } catch (e) { /* fall back to min-height */ }
+      });
+
+      btnM.addEventListener("click", function () { state.edition = "morning"; render(); });
+      btnE.addEventListener("click", function () { state.edition = "evening"; render(); });
+      sel.addEventListener("change", function () { setDate(sel.value); });
+
+      fetch("/briefs/manifest.json", { cache: "no-store" })
+        .then(function (r) {
+          if (!r.ok) throw new Error("manifest " + r.status);
+          return r.json();
+        })
+        .then(function (data) {
+          briefs = data.briefs || [];
+          briefs.forEach(function (b) {
+            (byDate[b.date] = byDate[b.date] || {})[b.edition] = b.file;
+          });
+          var dates = Object.keys(byDate).sort().reverse(); // newest first
+          if (!dates.length) throw new Error("no briefs");
+
+          dates.forEach(function (d) {
+            var opt = document.createElement("option");
+            opt.value = d;
+            opt.textContent = fmtDate(d);
+            sel.appendChild(opt);
+          });
+
+          // default: URL params if valid, else the newest brief overall
+          var q = new URLSearchParams(window.location.search);
+          var qd = q.get("date"), qe = q.get("edition");
+          if (qd && byDate[qd]) {
+            setDate(qd, qe === "morning" || qe === "evening" ? qe : null);
+          } else {
+            var latest = briefs[briefs.length - 1]; // manifest sorted asc, evening after morning
+            setDate(latest.date, latest.edition);
+          }
+        })
+        .catch(function (err) {
+          metaPill.textContent = "failed to load briefs";
+          emptyState.classList.add("show");
+          emptyMsg.textContent = "Could not load brief index (" + String(err && err.message || err) + ").";
+          frame.style.display = "none";
+        });
+    })();
+  </script>
+</body>
+</html>
