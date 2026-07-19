@@ -98,21 +98,100 @@
       font-family: var(--font-mono); font-size: 0.68rem;
       letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-2);
     }
-    select#dateSelect {
-      appearance: none; -webkit-appearance: none;
-      background: var(--bg-2) url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2300ff88' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 0.9rem center;
-      color: var(--ink-0);
+    /* ---------- calendar date picker ---------- */
+    .datepick { position: relative; }
+    button.date-btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--bg-2); color: var(--ink-0);
       font-family: var(--font-mono); font-size: 0.85rem;
-      padding: 0.6rem 2.4rem 0.6rem 1rem;
+      padding: 0.6rem 1rem;
       border: 1px solid var(--line); border-radius: 12px;
       cursor: pointer; outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
-    select#dateSelect:hover, select#dateSelect:focus {
+    button.date-btn:hover, button.date-btn:focus-visible {
       border-color: var(--accent-soft);
       box-shadow: 0 0 0 3px var(--accent-dim);
     }
-    select#dateSelect option { background: var(--bg-2); color: var(--ink-0); }
+    .date-btn .cal-ico { color: var(--accent); font-size: 0.95rem; line-height: 1; }
+    .date-btn .chev {
+      width: 10px; height: 6px; display: inline-block;
+      background: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2300ff88' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
+      transition: transform 0.2s;
+    }
+    .datepick.open .date-btn .chev { transform: rotate(180deg); }
+
+    .cal-pop {
+      position: absolute; top: calc(100% + 10px); left: 0; z-index: 60;
+      width: 308px;
+      background: rgba(18, 22, 21, 0.96);
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--line); border-radius: 22px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+      padding: 1rem 1.05rem 1.1rem;
+      display: none;
+      animation: calIn 0.16s ease-out;
+    }
+    .datepick.open .cal-pop { display: block; }
+    @keyframes calIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .cal-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 0.2rem 0.6rem;
+    }
+    .cal-month {
+      font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent);
+    }
+    .cal-nav { display: inline-flex; gap: 0.3rem; }
+    .cal-nav button {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: transparent; border: 1px solid var(--line);
+      color: var(--ink-1); font-size: 0.8rem; line-height: 1;
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+    }
+    .cal-nav button:not(:disabled):hover {
+      color: var(--accent); border-color: var(--accent-soft); background: var(--accent-dim);
+    }
+    .cal-nav button:disabled { color: var(--ink-3); cursor: not-allowed; }
+
+    .cal-grid {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      gap: 2px 0; text-align: center;
+    }
+    .cal-dow {
+      font-family: var(--font-mono); font-size: 0.66rem; font-weight: 600;
+      color: var(--ink-1); padding: 0.35rem 0 0.45rem;
+    }
+    .cal-dow.wkend { color: var(--ink-3); }
+    .cal-day { padding: 1px 0; }
+    .cal-day button {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: transparent; border: 0;
+      font-family: var(--font-mono); font-size: 0.8rem;
+      color: var(--ink-0); cursor: pointer;
+      position: relative;
+      transition: background 0.15s, color 0.15s;
+    }
+    .cal-day button::after {          /* availability dot */
+      content: ""; position: absolute; left: 50%; bottom: 3px;
+      width: 4px; height: 4px; border-radius: 50%;
+      transform: translateX(-50%);
+      background: var(--accent); opacity: 0.85;
+    }
+    .cal-day button.off { color: var(--ink-3); cursor: default; }
+    .cal-day button.off::after { display: none; }
+    .cal-day button:not(.off):hover { background: var(--accent-dim); color: var(--accent); }
+    .cal-day button.sel {
+      background: var(--accent); color: #050606; font-weight: 600;
+      box-shadow: 0 0 14px var(--accent-glow);
+    }
+    .cal-day button.sel::after { background: #050606; }
+    .cal-day button.today:not(.sel) { border: 1px solid var(--accent-soft); }
 
     .toggle {
       display: inline-flex; border: 1px solid var(--line);
@@ -210,7 +289,23 @@
 
   <div class="controls">
     <span class="ctl-label">Date</span>
-    <select id="dateSelect" aria-label="Select brief date"></select>
+    <div class="datepick" id="datePick">
+      <button type="button" class="date-btn" id="dateBtn" aria-haspopup="dialog" aria-expanded="false">
+        <span class="cal-ico">&#9638;</span>
+        <span id="dateBtnLabel">loading&hellip;</span>
+        <span class="chev"></span>
+      </button>
+      <div class="cal-pop" id="calPop" role="dialog" aria-label="Choose brief date">
+        <div class="cal-head">
+          <span class="cal-month" id="calMonth"></span>
+          <span class="cal-nav">
+            <button type="button" id="calPrev" aria-label="Previous month">&#8249;</button>
+            <button type="button" id="calNext" aria-label="Next month">&#8250;</button>
+          </span>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+      </div>
+    </div>
 
     <span class="ctl-label">Edition</span>
     <div class="toggle" role="group" aria-label="Edition">
@@ -247,7 +342,16 @@
       var byDate = {};            // date -> {morning: file, evening: file}
       var state = { date: null, edition: null };
 
-      var sel = document.getElementById("dateSelect");
+      var datePick = document.getElementById("datePick");
+      var dateBtn = document.getElementById("dateBtn");
+      var dateBtnLabel = document.getElementById("dateBtnLabel");
+      var calPop = document.getElementById("calPop");
+      var calMonthEl = document.getElementById("calMonth");
+      var calGrid = document.getElementById("calGrid");
+      var calPrev = document.getElementById("calPrev");
+      var calNext = document.getElementById("calNext");
+      var calYear = null, calMonth = null;   // displayed month (0-based)
+      var minMonth = null, maxMonth = null;  // [year*12+month] bounds from data
       var btnM = document.getElementById("btnMorning");
       var btnE = document.getElementById("btnEvening");
       var frame = document.getElementById("briefFrame");
@@ -263,6 +367,92 @@
           weekday: "short", day: "2-digit", month: "short", year: "numeric"
         });
       }
+
+      /* ---------- calendar ---------- */
+      var MONTHS = ["January","February","March","April","May","June",
+                    "July","August","September","October","November","December"];
+      var DOWS = ["M","T","W","T","F","S","S"];
+
+      function iso(y, m, d) {
+        return y + "-" + String(m + 1).padStart(2, "0") + "-" + String(d).padStart(2, "0");
+      }
+
+      function renderCal() {
+        calMonthEl.textContent = MONTHS[calMonth] + " " + calYear;
+        var idx = calYear * 12 + calMonth;
+        calPrev.disabled = minMonth !== null && idx <= minMonth;
+        calNext.disabled = maxMonth !== null && idx >= maxMonth;
+
+        calGrid.textContent = "";
+        DOWS.forEach(function (dw, i) {
+          var el = document.createElement("span");
+          el.className = "cal-dow" + (i >= 5 ? " wkend" : "");
+          el.textContent = dw;
+          calGrid.appendChild(el);
+        });
+
+        var first = new Date(calYear, calMonth, 1);
+        var lead = (first.getDay() + 6) % 7;           // Monday-first offset
+        var days = new Date(calYear, calMonth + 1, 0).getDate();
+        var todayIso = (function (n) {
+          return iso(n.getFullYear(), n.getMonth(), n.getDate());
+        })(new Date());
+
+        for (var i = 0; i < lead; i++) {
+          var pad = document.createElement("span");
+          pad.className = "cal-day";
+          calGrid.appendChild(pad);
+        }
+        for (var d = 1; d <= days; d++) {
+          var cell = document.createElement("span");
+          cell.className = "cal-day";
+          var b = document.createElement("button");
+          b.type = "button";
+          b.textContent = d;
+          var dIso = iso(calYear, calMonth, d);
+          var has = !!byDate[dIso];
+          if (!has) { b.className = "off"; b.disabled = true; }
+          if (dIso === state.date) b.classList.add("sel");
+          if (dIso === todayIso) b.classList.add("today");
+          if (has) {
+            b.addEventListener("click", (function (val) {
+              return function () { setDate(val); closeCal(); };
+            })(dIso));
+          }
+          cell.appendChild(b);
+          calGrid.appendChild(cell);
+        }
+      }
+
+      function openCal() {
+        var p = state.date ? state.date.split("-") : null;
+        if (p) { calYear = +p[0]; calMonth = +p[1] - 1; }
+        renderCal();
+        datePick.classList.add("open");
+        dateBtn.setAttribute("aria-expanded", "true");
+      }
+      function closeCal() {
+        datePick.classList.remove("open");
+        dateBtn.setAttribute("aria-expanded", "false");
+      }
+
+      dateBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        datePick.classList.contains("open") ? closeCal() : openCal();
+      });
+      calPop.addEventListener("click", function (e) { e.stopPropagation(); });
+      document.addEventListener("click", closeCal);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeCal();
+      });
+      calPrev.addEventListener("click", function () {
+        calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; }
+        renderCal();
+      });
+      calNext.addEventListener("click", function () {
+        calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; }
+        renderCal();
+      });
 
       function setPill(edition, dateText) {
         // build with DOM methods (no innerHTML)
@@ -311,7 +501,7 @@
         } else {
           state.edition = editions.evening ? "evening" : "morning";
         }
-        sel.value = date;
+        dateBtnLabel.textContent = fmtDate(date);
         render();
       }
 
@@ -326,7 +516,6 @@
 
       btnM.addEventListener("click", function () { state.edition = "morning"; render(); });
       btnE.addEventListener("click", function () { state.edition = "evening"; render(); });
-      sel.addEventListener("change", function () { setDate(sel.value); });
 
       fetch("/briefs/manifest.json", { cache: "no-store" })
         .then(function (r) {
@@ -338,15 +527,12 @@
           briefs.forEach(function (b) {
             (byDate[b.date] = byDate[b.date] || {})[b.edition] = b.file;
           });
-          var dates = Object.keys(byDate).sort().reverse(); // newest first
+          var dates = Object.keys(byDate).sort();
           if (!dates.length) throw new Error("no briefs");
 
-          dates.forEach(function (d) {
-            var opt = document.createElement("option");
-            opt.value = d;
-            opt.textContent = fmtDate(d);
-            sel.appendChild(opt);
-          });
+          var lo = dates[0].split("-"), hi = dates[dates.length - 1].split("-");
+          minMonth = (+lo[0]) * 12 + (+lo[1] - 1);
+          maxMonth = (+hi[0]) * 12 + (+hi[1] - 1);
 
           // default: URL params if valid, else the newest brief overall
           var q = new URLSearchParams(window.location.search);
