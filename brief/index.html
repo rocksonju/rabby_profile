@@ -505,10 +505,18 @@
         render();
       }
 
-      // auto-resize iframe to its content (same-origin)
+      // auto-resize iframe to its content + force headline links to open in a new tab
       frame.addEventListener("load", function () {
         try {
           var doc = frame.contentDocument || frame.contentWindow.document;
+          var links = doc.querySelectorAll("a[href]");
+          for (var i = 0; i < links.length; i++) {
+            var href = links[i].getAttribute("href") || "";
+            if (/^https?:/i.test(href)) {          // external links only
+              links[i].setAttribute("target", "_blank");
+              links[i].setAttribute("rel", "noopener noreferrer");
+            }
+          }
           var h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
           if (h > 200) frame.style.height = (h + 40) + "px";
         } catch (e) { /* fall back to min-height */ }
