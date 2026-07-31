@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-30T12:36:56Z",
+  "updated": "2026-07-31T13:30:57Z",
   "briefs": [
     {
       "date": "2026-06-25",
@@ -240,6 +240,11 @@
       "date": "2026-07-30",
       "edition": "evening",
       "file": "brief_2026-07-30_evening.html"
+    },
+    {
+      "date": "2026-07-31",
+      "edition": "evening",
+      "file": "brief_2026-07-31_evening.html"
     }
   ]
 }
