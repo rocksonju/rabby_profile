@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-10T14:55:00Z",
+  "updated": "2026-09-10T15:09:58Z",
   "briefs": [
     {
       "date": "2026-06-25",
@@ -520,6 +520,11 @@
       "date": "2026-09-10",
       "edition": "morning",
       "file": "brief_2026-09-10_morning.html"
+    },
+    {
+      "date": "2026-09-10",
+      "edition": "evening",
+      "file": "brief_2026-09-10_evening.html"
     }
   ]
 }
