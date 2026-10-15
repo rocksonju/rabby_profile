@@ -28,7 +28,7 @@ Everything lives in `index.html`:
 
 - **CSS custom properties** at `:root` — all colours (`--bg-*`, `--ink-*`, `--accent`), fonts, spacing (`--section-y: 9rem`, `--r: 18px`)
 - **Fonts** via Google Fonts: Syne (display/body), JetBrains Mono, Instrument Serif
-- **Sections** in order: hero → marquee → about → career → projects → now → contact → footer
+- **Sections** in order: hero → marquee → about → career → projects → live (GSEC Analyzer hero `#gsec`, then the tool cards) → now → contact → footer
 - **JS** (inline, ~50 lines): kinetic wordmark hover, cursor-tracked blob, IntersectionObserver scroll reveals, smooth scroll
 
 ## Key Design Constraints
@@ -42,3 +42,5 @@ Everything lives in `index.html`:
 - Nav links (About/Work/Now) hide at `max-width: 667px` — only brand + CTA remain
 - Mobile overrides at `max-width: 430px` — targets iPhone 16 Pro/Pro Max; blob hidden, `100svh` hero, tighter spacing
 - Footer has hits.sh visitor badge: `hits.sh/rabbyz.com.svg` with `color=00ff88`
+- GSEC Analyzer hero: an animated mock terminal built from an embedded GSOM snapshot (`GS_BONDS`, `GS_CURVE`, `GS_PREV` in the script). gsec.rabbyz.com sends no CORS headers, so the page cannot read it live; refresh the snapshot by hand from its public `/api/bonds` and `/api/curve`
+- DSE close ticker (fixed bottom bar) reads `/ticker/latest.json`. Morning_News writes that file (`news/ticker.py`, run by `publish_briefs.py` on the publishing node) from the Optimus hub; never hand-edit it. No file → the bar stays hidden

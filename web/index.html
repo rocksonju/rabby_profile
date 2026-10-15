@@ -177,6 +177,21 @@
       background: var(--glass-2);
     }
 
+    .nav-links a.nav-new {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-links a.nav-new::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ff9f0a;
+      box-shadow: 0 0 8px rgba(255, 159, 10, 0.8);
+    }
+
     .nav-cta {
       background: var(--accent);
       color: #000 !important;
@@ -855,6 +870,735 @@
       gap: 0.7rem;
     }
 
+    /* ── GSEC ANALYZER HERO ── */
+    .gsec-hero {
+      --gs: #ff9f0a;
+      --gs-glow: rgba(255, 159, 10, 0.35);
+      --gs-up: #22e58a;
+      --gs-dn: #ff5d5d;
+      position: relative;
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 3rem;
+      align-items: center;
+      padding: 3rem 2.75rem;
+      margin-bottom: 2.5rem;
+      border-radius: var(--r);
+      border: 1px solid var(--line-2);
+      background:
+        radial-gradient(60% 80% at 100% 0%, rgba(255, 159, 10, 0.07), transparent 60%),
+        radial-gradient(70% 90% at 0% 100%, rgba(0, 255, 136, 0.07), transparent 60%),
+        var(--bg-1);
+      overflow: hidden;
+      scroll-margin-top: 110px;
+    }
+
+    .gsec-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(70% 70% at 70% 50%, #000, transparent);
+      -webkit-mask-image: radial-gradient(70% 70% at 70% 50%, #000, transparent);
+      pointer-events: none;
+    }
+
+    .gsec-copy,
+    .gsec-stage {
+      position: relative;
+      z-index: 1;
+      min-width: 0;
+    }
+
+    .gsec-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(38px, 5vw, 64px);
+      letter-spacing: -0.035em;
+      line-height: 0.95;
+      margin: 0 0 1.25rem;
+    }
+
+    .gsec-title em {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: -0.01em;
+      color: var(--gs);
+      text-shadow: 0 0 34px var(--gs-glow);
+    }
+
+    .gsec-lede {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--ink-1);
+      margin: 0 0 1.75rem;
+    }
+
+    .gsec-mods {
+      list-style: none;
+      margin: 0 0 1.75rem;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .gsec-mods li {
+      background: var(--bg-1);
+      padding: 0.9rem 1rem;
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--ink-2);
+      transition: background 0.25s;
+    }
+
+    .gsec-mods li:hover {
+      background: rgba(255, 159, 10, 0.05);
+    }
+
+    .gsec-mods b {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gs);
+      margin-bottom: 0.3rem;
+    }
+
+    .gsec-stats {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .gsec-stats div {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      line-height: 1.5;
+    }
+
+    .gsec-stats strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-transform: none;
+      color: var(--ink-0);
+    }
+
+    .gsec-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    /* the terminal window */
+    .gs-win {
+      display: block;
+      text-decoration: none;
+      color: #e9e9e9;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      font-family: var(--font-mono);
+      transform: perspective(1800px) rotateY(-9deg) rotateX(4deg);
+      transform-origin: 60% 50%;
+      box-shadow:
+        0 0 0 1px rgba(255, 159, 10, 0.28),
+        0 40px 110px rgba(0, 0, 0, 0.65),
+        0 0 90px rgba(255, 159, 10, 0.13),
+        -30px 30px 120px rgba(0, 255, 136, 0.07);
+      transition: transform 0.7s cubic-bezier(.2, .7, .2, 1), box-shadow 0.7s;
+    }
+
+    .gs-win:hover {
+      transform: perspective(1800px) rotateY(0) rotateX(0) translateY(-4px);
+      box-shadow:
+        0 0 0 1px rgba(255, 159, 10, 0.5),
+        0 50px 120px rgba(0, 0, 0, 0.7),
+        0 0 120px rgba(255, 159, 10, 0.22);
+    }
+
+    .gs-chrome {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 9px 12px;
+      background: #121212;
+      border-bottom: 1px solid #222;
+      font-size: 10.5px;
+      color: #8a8a8a;
+    }
+
+    .gs-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .gs-dots i {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #333;
+    }
+
+    .gs-dots i:nth-child(1) { background: #ff5f57; }
+    .gs-dots i:nth-child(2) { background: #febc2e; }
+    .gs-dots i:nth-child(3) { background: #28c840; }
+
+    .gs-url {
+      flex: 1;
+      text-align: center;
+      background: #0a0a0a;
+      border: 1px solid #262626;
+      border-radius: 6px;
+      padding: 3px 10px;
+      color: #bdbdbd;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .gs-url span { color: var(--gs-up); }
+
+    .gs-livetag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gs);
+      letter-spacing: 0.16em;
+    }
+
+    .gs-livetag::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gs);
+      box-shadow: 0 0 8px var(--gs);
+      animation: gsBlink 1.2s steps(2) infinite;
+    }
+
+    @keyframes gsBlink { 50% { opacity: 0.2; } }
+
+    .gs-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 6px;
+      background: var(--gs);
+      color: #000;
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .gs-bar .on {
+      background: #000;
+      color: var(--gs);
+      padding: 2px 6px;
+    }
+
+    .gs-bar .sp { flex: 1; }
+
+    .gs-bar .chip {
+      border: 1px solid rgba(0, 0, 0, 0.55);
+      padding: 1px 5px;
+    }
+
+    .gs-body {
+      display: grid;
+      grid-template-columns: 1.22fr 1fr;
+      gap: 5px;
+      padding: 5px;
+      height: 318px;
+    }
+
+    .gs-col {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 5px;
+      min-height: 0;
+    }
+
+    .gs-panel {
+      border: 1px solid #2a2a2a;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .gs-ph {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      background: var(--gs);
+      color: #000;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 3px 6px;
+      white-space: nowrap;
+    }
+
+    .gs-ph span:last-child { font-weight: 500; }
+
+    .gs-row {
+      display: grid;
+      grid-template-columns: 11.5ch 1fr 4.5ch 6.5ch 5.5ch 7.5ch;
+      gap: 0 6px;
+      padding: 2px 6px;
+      font-size: 9.6px;
+      line-height: 1.55;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .gs-row > span:nth-child(n+3) { text-align: right; }
+
+    .gs-row.hd {
+      color: var(--gs);
+      border-bottom: 1px solid #222;
+      font-size: 9px;
+    }
+
+    .gs-rows {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      mask-image: linear-gradient(transparent, #000 8%, #000 88%, transparent);
+      -webkit-mask-image: linear-gradient(transparent, #000 8%, #000 88%, transparent);
+    }
+
+    .gs-track { animation: gsScroll 46s linear infinite; }
+
+    .gs-win:hover .gs-track { animation-play-state: paused; }
+
+    @keyframes gsScroll { to { transform: translateY(-50%); } }
+
+    .gs-track .gs-row:nth-child(4n+1) { background: rgba(255, 159, 10, 0.035); }
+
+    .gs-track .gs-row.sel {
+      background: rgba(255, 159, 10, 0.16);
+      color: #ffd28a;
+    }
+
+    .gs-up { color: var(--gs-up); }
+    .gs-dn { color: var(--gs-dn); }
+
+    .gs-flash-up { animation: gsFlashUp 0.9s ease-out; }
+    .gs-flash-dn { animation: gsFlashDn 0.9s ease-out; }
+
+    @keyframes gsFlashUp { 0% { background: rgba(34, 229, 138, 0.45); color: #fff; } }
+    @keyframes gsFlashDn { 0% { background: rgba(255, 93, 93, 0.45); color: #fff; } }
+
+    .gs-yas {
+      padding: 6px 8px 7px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 2px 10px;
+      font-size: 9.6px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .gs-yas .k { color: var(--gs); }
+    .gs-yas .v { text-align: right; }
+
+    .gs-px {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 3px;
+    }
+
+    .gs-px b {
+      font-size: 26px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -0.02em;
+      transition: color 0.4s, text-shadow 0.4s;
+    }
+
+    .gs-px b.gs-up { color: var(--gs-up); text-shadow: 0 0 18px rgba(34, 229, 138, 0.5); }
+    .gs-px b.gs-dn { color: var(--gs-dn); text-shadow: 0 0 18px rgba(255, 93, 93, 0.5); }
+
+    .gs-curve { flex: 1; position: relative; min-height: 0; }
+
+    .gs-curve svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .gs-curve .grid line { stroke: #1d1d1d; stroke-width: 1; }
+    .gs-curve .ax { fill: #6d6d6d; font-size: 8px; font-family: var(--font-mono); }
+
+    .gs-curve .prev {
+      fill: none;
+      stroke: #8c8c8c;
+      stroke-width: 1;
+      stroke-dasharray: 3 3;
+      opacity: 0.7;
+    }
+
+    .gs-curve .now {
+      fill: none;
+      stroke: var(--gs);
+      stroke-width: 1.6;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 4px rgba(255, 159, 10, 0.6));
+    }
+
+    .gs-curve .area { fill: url(#gsArea); }
+
+    .gs-curve .xh { stroke: rgba(255, 159, 10, 0.45); stroke-width: 1; stroke-dasharray: 2 2; }
+    .gs-curve .mk { fill: #ffd400; stroke: #000; stroke-width: 1; }
+    .gs-curve .lbl { fill: #ffd400; font-size: 8.5px; font-family: var(--font-mono); }
+
+    .gs-tape {
+      overflow: hidden;
+      border-top: 1px solid #222;
+      background: #070707;
+      padding: 4px 0;
+      font-size: 9.6px;
+      white-space: nowrap;
+    }
+
+    .gs-tape-track {
+      display: inline-flex;
+      gap: 2.2rem;
+      animation: gsTape 60s linear infinite;
+      padding-left: 1rem;
+    }
+
+    .gs-tape-track b { color: var(--gs); font-weight: 500; }
+
+    @keyframes gsTape { to { transform: translateX(-50%); } }
+
+    .gs-scan {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 3px);
+    }
+
+    .gs-scan::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 90px;
+      background: linear-gradient(transparent, rgba(255, 159, 10, 0.06), transparent);
+      animation: gsBeam 6s linear infinite;
+    }
+
+    @keyframes gsBeam {
+      from { top: -90px; }
+      to { top: 100%; }
+    }
+
+    .gsec-note {
+      margin-top: 1.1rem;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--ink-3);
+      text-align: center;
+    }
+
+    @media(max-width:980px) {
+      .gsec-hero {
+        grid-template-columns: 1fr;
+        padding: 2.25rem 1.75rem;
+      }
+
+      .gs-win,
+      .gs-win:hover {
+        transform: none;
+      }
+    }
+
+    @media(max-width:640px) {
+      .gsec-hero {
+        padding: 1.75rem 1.1rem;
+        gap: 2rem;
+      }
+
+      .gsec-mods {
+        grid-template-columns: 1fr;
+      }
+
+      .gsec-stats {
+        gap: 1.25rem;
+      }
+
+      .gsec-stats strong {
+        font-size: 22px;
+      }
+
+      .gs-body {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .gs-rows {
+        height: 150px;
+        flex: none;
+      }
+
+      .gs-curve {
+        height: 150px;
+        flex: none;
+      }
+
+      .gs-row {
+        grid-template-columns: 1fr 4.5ch 6.5ch 5.5ch 7.5ch;
+      }
+
+      .gs-row > span:first-child {
+        display: none;
+      }
+
+      .gs-bar .hide-sm {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .gs-track,
+      .gs-tape-track,
+      .gs-scan::after,
+      .gs-livetag::before {
+        animation: none;
+      }
+    }
+
+    /* ── DSE CLOSE TICKER (data: /ticker/latest.json, written by the Morning_News publisher) ── */
+    body.has-ticker {
+      padding-bottom: 46px;
+    }
+
+    .dse-tk {
+      --up: #00ff88;
+      --dn: #ff5d6c;
+      --flat: #8fa39a;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 60;
+      display: flex;
+      align-items: stretch;
+      height: 46px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      background: rgba(6, 8, 8, 0.82);
+      backdrop-filter: blur(22px) saturate(140%);
+      -webkit-backdrop-filter: blur(22px) saturate(140%);
+      border-top: 1px solid var(--line-2);
+      box-shadow: 0 -18px 60px rgba(0, 0, 0, 0.55);
+      transform: translateY(100%);
+      animation: tkIn 0.8s 0.4s cubic-bezier(.2, .8, .2, 1) forwards;
+    }
+
+    .dse-tk[hidden] {
+      display: none;
+    }
+
+    .dse-tk::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -1px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent) no-repeat;
+      background-size: 40% 100%;
+      opacity: 0.55;
+      animation: tkSheen 5s linear infinite;
+    }
+
+    @keyframes tkIn { to { transform: translateY(0); } }
+
+    @keyframes tkSheen {
+      from { background-position: -40% 0; }
+      to { background-position: 140% 0; }
+    }
+
+    .tk-tag {
+      flex: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2px;
+      padding: 0 18px;
+      background: linear-gradient(90deg, rgba(0, 255, 136, 0.14), rgba(0, 255, 136, 0.03));
+      border-right: 1px solid var(--line-2);
+      white-space: nowrap;
+    }
+
+    .tk-tag b {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 10.5px;
+      letter-spacing: 0.24em;
+      color: var(--accent);
+    }
+
+    .tk-tag b::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .tk-tag span {
+      font-size: 9.5px;
+      letter-spacing: 0.16em;
+      color: var(--ink-3);
+    }
+
+    .tk-view {
+      flex: 1;
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+    }
+
+    .tk-track {
+      display: inline-flex;
+      align-items: center;
+      height: 100%;
+      white-space: nowrap;
+      animation: tkRun var(--dur, 90s) linear infinite;
+    }
+
+    .dse-tk:hover .tk-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes tkRun { to { transform: translateX(-50%); } }
+
+    .tk-item {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 0 22px;
+      border-right: 1px solid rgba(244, 255, 247, 0.06);
+      transition: background 0.2s;
+    }
+
+    .tk-item:hover { background: rgba(0, 255, 136, 0.06); }
+
+    .tk-sym { color: var(--ink-0); font-weight: 700; letter-spacing: 0.04em; }
+    .tk-px { color: rgba(244, 255, 247, 0.78); font-variant-numeric: tabular-nums; }
+    .tk-ch { font-size: 11.5px; font-variant-numeric: tabular-nums; }
+    .tk-ch.up { color: var(--up); }
+    .tk-ch.dn { color: var(--dn); }
+    .tk-ch.fl { color: var(--flat); }
+
+    .tk-item.idx {
+      background: rgba(0, 255, 136, 0.045);
+      padding: 0 26px;
+    }
+
+    .tk-item.idx .tk-sym {
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+    }
+
+    .tk-item.idx .tk-px {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      text-shadow: 0 0 16px rgba(0, 255, 136, 0.35);
+    }
+
+    .tk-hot {
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      color: #000;
+      background: var(--up);
+      padding: 1px 5px;
+      border-radius: 3px;
+      align-self: center;
+    }
+
+    .tk-hot.dn { background: var(--dn); }
+
+    .tk-breadth {
+      flex: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 250px;
+      padding: 0 18px;
+      border-left: 1px solid var(--line-2);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+    }
+
+    .tk-bar {
+      display: flex;
+      height: 4px;
+      border-radius: 4px;
+      overflow: hidden;
+      background: #1a1f1d;
+    }
+
+    .tk-bar i { display: block; height: 100%; width: 0; transition: width 1.4s cubic-bezier(.2, .8, .2, 1); }
+    .tk-bar .a { background: var(--up); box-shadow: 0 0 8px var(--up); }
+    .tk-bar .u { background: var(--flat); }
+    .tk-bar .d { background: var(--dn); }
+
+    .tk-nums { display: flex; justify-content: space-between; gap: 10px; color: var(--ink-2); white-space: nowrap; }
+    .tk-nums .up { color: var(--up); }
+    .tk-nums .dn { color: var(--dn); }
+
+    @media(max-width:760px) {
+      body.has-ticker { padding-bottom: 40px; }
+      .dse-tk { height: 40px; font-size: 11.5px; }
+      .tk-breadth { display: none; }
+      .tk-tag { padding: 0 12px; }
+      .tk-tag span { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .dse-tk { animation: none; transform: none; }
+      .dse-tk::before { animation: none; }
+      .tk-track { animation: none; }
+      .tk-view { overflow-x: auto; }
+    }
+
     /* ── NOW / FOCUS ── */
     .focus-grid {
       display: grid;
@@ -1215,6 +1959,7 @@
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Work</a></li>
+      <li><a href="#gsec" class="nav-new">GSEC</a></li>
       <li><a href="#live">Live</a></li>
       <li><a href="#now">Now</a></li>
       <li><a href="/brief/">Brief</a></li>
@@ -1476,6 +2221,82 @@
       <div class="wrap">
         <div class="section-label">Live Now</div>
         <h2 class="section-h reveal">Tools running<br>in production.</h2>
+
+        <div class="gsec-hero reveal" id="gsec">
+          <div class="gsec-copy">
+            <span class="live-badge"><span class="live-dot"></span>Live · Flagship build</span>
+            <h3 class="gsec-title">GSEC <em>Analyzer</em></h3>
+            <p class="gsec-lede">
+              A terminal-style workstation for Bangladesh government securities. Every T-bond and
+              FRTB priced off Bangladesh Bank's GSOM data &mdash; yield &#8644; price, duration and
+              convexity, the yield curve and the order book on one screen, with the treasury book,
+              daily data tracker and auction calendar alongside.
+            </p>
+            <ul class="gsec-mods">
+              <li><b>F1 Launchpad</b>Yield &#8644; price, risk, GSOM curve &amp; order book</li>
+              <li><b>F2 Portfolio</b>Treasury book at market, sell scenarios, Excel in/out</li>
+              <li><b>F3 GSEC Data</b>Bangladesh Bank &times; DSE daily tracker, reconciled</li>
+              <li><b>F4 Auctions</b>T-Bill &amp; T-Bond auction calendar, checked weekly</li>
+            </ul>
+            <div class="gsec-stats">
+              <div><strong>223</strong>bonds priced</div>
+              <div><strong>4</strong>modules</div>
+              <div><strong>1&thinsp;min</strong>order-book refresh</div>
+            </div>
+            <div class="gsec-ctas">
+              <a href="https://gsec.rabbyz.com/app" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Open the terminal ↗</a>
+              <span class="tag">FastAPI</span>
+              <span class="tag">React</span>
+              <span class="tag">Bond math</span>
+            </div>
+          </div>
+
+          <div class="gsec-stage">
+            <a class="gs-win" href="https://gsec.rabbyz.com/app" target="_blank" rel="noopener noreferrer"
+              aria-label="Open GSEC Analyzer at gsec.rabbyz.com">
+              <div class="gs-chrome" aria-hidden="true">
+                <span class="gs-dots"><i></i><i></i><i></i></span>
+                <span class="gs-url"><span>https://</span>gsec.rabbyz.com/app</span>
+                <span class="gs-livetag">LIVE</span>
+              </div>
+              <div class="gs-bar" aria-hidden="true">
+                <span class="on">F1 LAUNCHPAD</span>
+                <span class="hide-sm">F4 AUCTIONS</span>
+                <span class="sp"></span>
+                <span class="hide-sm">SETTLE</span>
+                <span class="chip hide-sm">14-OCT-26</span>
+                <span class="chip">T+0</span>
+                <span>DATA AS OF 14-OCT-26 <span id="gsClock">16:00</span></span>
+              </div>
+              <div class="gs-body" aria-hidden="true">
+                <div class="gs-panel">
+                  <div class="gs-ph"><span>BONDS</span><span>223 · SORT: MAT ▲</span></div>
+                  <div class="gs-row hd"><span>ISIN</span><span>NAME</span><span>CPN</span><span>YLD</span><span>Δbp</span><span>PX</span></div>
+                  <div class="gs-rows"><div class="gs-track" id="gsTrack"></div></div>
+                </div>
+                <div class="gs-col">
+                  <div class="gs-panel">
+                    <div class="gs-ph"><span>YAS · BD0935291106</span><span>10Y BGTB 22/01/35</span></div>
+                    <div class="gs-yas">
+                      <div class="gs-px"><span class="k">CLEAN PX</span><b id="gsPx">125.3553</b></div>
+                      <span class="k">YIELD %</span><span class="v" id="gsYld">7.8500</span>
+                      <span class="k">MODIFIED DUR</span><span class="v" id="gsDur">5.79</span>
+                      <span class="k">PV01 / 100</span><span class="v" id="gsPv">0.0726</span>
+                    </div>
+                  </div>
+                  <div class="gs-panel">
+                    <div class="gs-ph"><span>YTM CURVE</span><span>13-OCT-26 vs 12-OCT-26</span></div>
+                    <div class="gs-curve"><svg id="gsCurve" viewBox="0 0 320 150" preserveAspectRatio="none"></svg></div>
+                  </div>
+                </div>
+              </div>
+              <div class="gs-tape" aria-hidden="true"><div class="gs-tape-track" id="gsTape"></div></div>
+              <div class="gs-scan"></div>
+            </a>
+            <p class="gsec-note">Animated preview built from the 14-Oct-26 GSOM snapshot &middot; open the app for live data</p>
+          </div>
+        </div>
+
         <div class="live-grid reveal">
           <a class="live-card" href="/brief/">
             <span class="live-badge"><span class="live-dot"></span>Live · Auto-updating</span>
@@ -1635,6 +2456,16 @@
 
   </main>
 
+  <!-- DSE CLOSE TICKER (filled from /ticker/latest.json; stays hidden without it) -->
+  <div class="dse-tk" id="dseTk" hidden>
+    <div class="tk-tag"><b>DSE CLOSE</b><span id="tkDate"></span></div>
+    <div class="tk-view"><div class="tk-track" id="tkTrack"></div></div>
+    <div class="tk-breadth">
+      <div class="tk-bar"><i class="a"></i><i class="u"></i><i class="d"></i></div>
+      <div class="tk-nums"><span class="up" id="tkA"></span><span id="tkU"></span><span class="dn" id="tkD"></span><span id="tkT"></span></div>
+    </div>
+  </div>
+
   <script>
     // kinetic wordmark letters
     const wm = document.getElementById('wm');
@@ -1670,6 +2501,257 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    const GS_BONDS = [["BD0926151152","15Y 19/10/26",10.99,7.5911,100.0408,-2.6,0.01,"TBOND"],["BD0927311151","15Y 22/02/27",11.6,7.7127,101.3022,-7.8,0.36,"TBOND"],["BD0927471021","02Y 04/06/27",12.29,7.5516,102.8814,-23.7,0.64,"TBOND"],["BD0927121204","20Y 26/09/27",14.23,7.699,105.8644,-13.0,0.95,"TBOND"],["BD0927231151","15Y 19/12/27",12.1,7.8356,104.6931,-4.7,1.18,"TBOND"],["BD0928361205","20Y 27/03/28",13.14,7.9116,107.0352,4.2,1.45,"TBOND"],["BD0928471152","15Y 19/06/28",12.4,7.9764,106.802,14.1,1.68,"TBOND"],["BD0928121203","20Y 24/09/28",13.07,8.0512,108.8581,24.1,1.95,"TBOND"],["BD0928221052","05Y 13/12/28",10.35,8.1129,104.3367,22.9,2.17,"TBOND"],["BD0929361154","15Y 27/03/29",12.0,8.1932,108.2968,21.3,2.45,"TBOND"],["BD0929381103","10Y 19/06/29",8.44,8.258,100.41,21.5,2.68,"TBOND"],["BD0929161208","20Y 28/10/29",9.1,8.3296,102.0245,17.5,3.04,"TBOND"],["BD0930281201","20Y 24/03/30",9.15,8.328,102.4093,4.8,3.44,"TBOND"],["BD0930041159","15Y 29/07/30",10.06,8.428,105.178,17.7,3.79,"TBOND"],["BD0930241205","20Y 29/12/30",9.57,8.2786,104.4872,11.2,4.21,"TBOND"],["BD0931471207","20Y 29/06/31",9.65,7.9948,106.3661,-11.7,4.71,"TBOND"],["BD0932691100","10Y 19/01/32",7.1,8.0472,95.9825,-8.2,5.27,"TBOND"],["BD0932041207","20Y 25/07/32",12.12,8.2253,117.6045,5.3,5.78,"TBOND"],["BD0933351100","10Y 15/03/33",8.45,8.075,101.8391,-30.6,6.42,"TBOND"],["BD0933101158","15Y 26/09/33",7.2,8.2686,94.4289,-6.2,6.96,"TBOND"],["BD0934401102","10Y 17/04/34",12.15,8.1279,122.2758,-37.3,7.51,"TBOND"],["BD0935291106","10Y 22/01/35",12.08,7.85,125.3553,-8.8,8.28,"TBOND"],["BD0936401209","20Y 27/04/36",8.24,8.5524,97.9852,0.3,9.54,"TBOND"],["BD0940441209","20Y 24/06/40",8.94,8.5285,103.2653,0.0,13.7,"TBOND"]];
+    const GS_CURVE = [[0.06,7.62],[0.23,7.74],[0.31,7.73],[0.5,7.63],[0.73,7.49],[1.0,7.74],[1.06,7.8],[1.5,7.92],[2.0,8.06],[2.5,8.2],[2.98,8.34],[3.0,8.34],[3.33,8.24],[3.5,8.37],[3.91,8.44],[4.0,8.39],[4.5,8.11],[4.86,7.9],[5.0,7.95],[5.5,8.12],[5.94,8.28],[6.0,8.34],[6.18,8.55],[6.42,8.07],[6.5,8.11],[6.84,8.29],[7.0,8.25],[7.36,8.18],[7.5,8.13],[8.0,7.95],[8.27,7.85],[8.5,8.05],[9.0,8.5],[9.1,8.59],[9.5,8.55],[10.0,8.5],[10.5,8.44],[10.71,8.42],[11.0,8.42],[11.5,8.41],[12.0,8.4],[12.45,8.39],[12.5,8.4],[13.0,8.5],[13.45,8.6],[13.5,8.58],[13.6,8.54],[13.87,8.5],[14.0,8.5],[14.5,8.52],[15.0,8.54],[15.5,8.56],[15.71,8.57],[16.0,8.59],[16.2,8.6],[16.5,8.58],[17.0,8.55],[17.5,8.52],[17.78,8.5],[18.0,8.53],[18.5,8.62],[18.62,8.65],[18.87,8.62],[19.0,8.63],[19.5,8.69],[20.0,8.75]];
+    const GS_PREV = [[0.06,7.64],[0.31,7.79],[0.5,7.78],[0.73,7.78],[1.0,7.83],[1.06,7.85],[1.24,7.9],[1.5,7.86],[1.92,7.8],[2.0,7.82],[2.5,7.99],[2.51,8.0],[2.59,8.01],[3.0,8.14],[3.5,8.29],[3.51,8.3],[3.56,8.19],[3.68,8.3],[3.91,8.19],[4.0,8.19],[4.5,8.13],[4.86,8.09],[5.0,8.1],[5.5,8.14],[5.94,8.18],[6.0,8.23],[6.19,8.4],[6.5,8.37],[6.84,8.34],[7.0,8.32],[7.36,8.27],[7.5,8.48],[7.68,8.76],[8.0,8.33],[8.28,7.93],[8.5,8.06],[8.77,8.23],[9.0,8.48],[9.1,8.6],[9.5,8.55],[10.0,8.49],[10.5,8.43],[10.71,8.41],[11.0,8.43],[11.5,8.48],[12.0,8.52],[12.45,8.56],[12.5,8.57],[13.0,8.65],[13.45,8.73],[13.5,8.67],[13.6,8.54],[13.87,8.5],[14.0,8.5],[14.5,8.53],[15.0,8.56],[15.5,8.59],[15.71,8.61],[16.0,8.67],[16.21,8.72],[16.5,8.66],[17.0,8.57],[17.5,8.47],[17.79,8.41],[18.0,8.44],[18.5,8.52],[18.62,8.55],[19.0,8.6],[19.5,8.68],[20.0,8.77]];
+
+    // GSEC Analyzer preview: real 14-Oct-26 snapshot, simulated ticks around it
+    (function () {
+      const track = document.getElementById('gsTrack');
+      const svg = document.getElementById('gsCurve');
+      if (!track || !svg) return;
+      const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const fmt = (n, d) => n.toFixed(d);
+      const el = (tag, cls, text) => {
+        const e = document.createElement(tag);
+        if (cls) e.className = cls;
+        if (text !== undefined) e.textContent = text;
+        return e;
+      };
+      const SVGNS = 'http://www.w3.org/2000/svg';
+      const sv = (tag, attrs, text) => {
+        const e = document.createElementNS(SVGNS, tag);
+        for (const k in attrs) e.setAttribute(k, attrs[k]);
+        if (text !== undefined) e.textContent = text;
+        return e;
+      };
+
+      // modified duration from coupon, yield and years left (semi-annual)
+      function modDur(cpn, y, yrs) {
+        const n = Math.max(1, Math.ceil(yrs * 2 - 1e-9));
+        const f = yrs * 2 - (n - 1);
+        const r = y / 200;
+        let pv = 0, tpv = 0;
+        for (let k = 1; k <= n; k++) {
+          const t = (k - 1 + f) / 2;
+          const cf = cpn / 2 + (k === n ? 100 : 0);
+          const d = cf / Math.pow(1 + r, 2 * t);
+          pv += d; tpv += t * d;
+        }
+        return tpv / pv / (1 + r);
+      }
+
+      const bonds = GS_BONDS.map(([isin, name, cpn, y, px, bp, yrs]) =>
+        ({ isin, name, cpn, y0: y, y, px, bp0: bp, yrs, dur: modDur(cpn, y, yrs) }));
+      const bpClass = bp => 'bp ' + (bp < 0 ? 'gs-up' : bp > 0 ? 'gs-dn' : '');
+      const bpText = bp => (bp > 0 ? '+' : '') + fmt(bp, 1);
+
+      // board rows and tape items, each list twice for a seamless loop
+      const tape = document.getElementById('gsTape');
+      for (let copy = 0; copy < 2; copy++) {
+        bonds.forEach((b, i) => {
+          const r = el('div', 'gs-row');
+          r.dataset.i = i;
+          r.append(el('span', '', b.isin), el('span', '', b.name), el('span', '', fmt(b.cpn, 2)),
+            el('span', 'y', fmt(b.y, 4)), el('span', bpClass(b.bp0), fmt(b.bp0, 1)), el('span', 'p', fmt(b.px, 4)));
+          track.append(r);
+          const t = el('span');
+          t.dataset.i = i;
+          t.append(el('b', '', b.name), ' ', el('span', 'y', fmt(b.y, 4)), ' ', el('span', bpClass(b.bp0), bpText(b.bp0) + 'bp'));
+          tape.append(t);
+        });
+      }
+
+      // yield curve
+      const W = 320, H = 150, L = 26, R = 6, T = 8, B = 16, YMIN = 7.0, YMAX = 9.0, TMAX = 20;
+      const sx = t => L + (t / TMAX) * (W - L - R);
+      const sy = y => T + (1 - (y - YMIN) / (YMAX - YMIN)) * (H - T - B);
+      const path = pts => pts.map((p, i) => (i ? 'L' : 'M') + sx(p[0]).toFixed(1) + ' ' + sy(p[1]).toFixed(1)).join(' ');
+      const defs = sv('defs', {}), grad = sv('linearGradient', { id: 'gsArea', x1: 0, y1: 0, x2: 0, y2: 1 });
+      grad.append(sv('stop', { offset: 0, 'stop-color': '#ff9f0a', 'stop-opacity': 0.22 }),
+        sv('stop', { offset: 1, 'stop-color': '#ff9f0a', 'stop-opacity': 0 }));
+      defs.append(grad);
+      const grid = sv('g', { class: 'grid' });
+      [7.5, 8, 8.5, 9].forEach(y => grid.append(sv('line', { x1: L, x2: W - R, y1: sy(y), y2: sy(y) })));
+      [5, 10, 15, 20].forEach(t => grid.append(sv('line', { x1: sx(t), x2: sx(t), y1: T, y2: H - B })));
+      svg.append(defs, grid);
+      [7.5, 8, 8.5, 9].forEach(y => svg.append(sv('text', { class: 'ax', x: 2, y: sy(y) + 3 }, fmt(y, 2))));
+      [0, 5, 10, 15, 20].forEach(t => svg.append(sv('text', { class: 'ax', x: sx(t) - (t === TMAX ? 13 : t ? 6 : 0), y: H - 4 }, t + 'Y')));
+      const nowD = path(GS_CURVE);
+      const last = GS_CURVE[GS_CURVE.length - 1];
+      const now = sv('path', { class: 'now', d: nowD });
+      const xh = sv('line', { class: 'xh', y1: T, y2: H - B });
+      const mk = sv('circle', { class: 'mk', r: 3 });
+      const lbl = sv('text', { class: 'lbl' });
+      svg.append(
+        sv('path', { class: 'area', d: `${nowD} L${sx(last[0])} ${H - B} L${sx(GS_CURVE[0][0])} ${H - B} Z` }),
+        sv('path', { class: 'prev', d: path(GS_PREV) }), now, xh, mk, lbl);
+      const len = now.getTotalLength();
+
+      const curveAt = t => {
+        for (let i = 1; i < GS_CURVE.length; i++) {
+          const [t0, y0] = GS_CURVE[i - 1], [t1, y1] = GS_CURVE[i];
+          if (t <= t1) return y0 + (y1 - y0) * ((t - t0) / ((t1 - t0) || 1));
+        }
+        return last[1];
+      };
+      function cursor(t) {
+        const y = curveAt(t), x = sx(t), yy = sy(y);
+        mk.setAttribute('cx', x); mk.setAttribute('cy', yy);
+        xh.setAttribute('x1', x); xh.setAttribute('x2', x);
+        lbl.setAttribute('x', Math.min(x + 6, W - 72)); lbl.setAttribute('y', Math.max(yy - 6, T + 8));
+        lbl.textContent = `${fmt(t, 1)}Y  ${fmt(y, 2)}%`;
+      }
+      cursor(8.28);
+
+      // YAS panel follows the 10Y 22/01/35
+      const yas = { cpn: 12.08, y0: 7.85, y: 7.85, px: 125.3553, yrs: 8.28 };
+      yas.dur = modDur(yas.cpn, yas.y, yas.yrs);
+      const pxEl = document.getElementById('gsPx'), yEl = document.getElementById('gsYld'),
+        dEl = document.getElementById('gsDur'), pvEl = document.getElementById('gsPv');
+      dEl.textContent = fmt(yas.dur, 2);
+      pvEl.textContent = fmt(yas.dur * yas.px / 10000, 4);
+      if (still) return;
+
+      function flash(e, up) {
+        e.classList.remove('gs-flash-up', 'gs-flash-dn');
+        void e.offsetWidth;
+        e.classList.add(up ? 'gs-flash-up' : 'gs-flash-dn');
+      }
+      // a random walk in bp, pulled back towards the snapshot so nothing drifts away
+      const step = (y, y0) => y + ((Math.random() - 0.5) * 3 - (y - y0) * 25) / 100;
+
+      function tickBond() {
+        const i = Math.floor(Math.random() * bonds.length), b = bonds[i];
+        const y = step(b.y, b.y0), dy = y - b.y;
+        b.px = b.px * (1 - b.dur * dy / 100);
+        b.y = y;
+        const bp = b.bp0 + (b.y - b.y0) * 100;
+        document.querySelectorAll(`#gsTrack [data-i="${i}"], #gsTape [data-i="${i}"]`).forEach(r => {
+          const ye = r.querySelector('.y'), be = r.querySelector('.bp'), pe = r.querySelector('.p');
+          ye.textContent = fmt(b.y, 4);
+          be.textContent = pe ? fmt(bp, 1) : bpText(bp) + 'bp';
+          be.className = bpClass(bp);
+          if (pe) { pe.textContent = fmt(b.px, 4); flash(pe, dy < 0); }
+          flash(ye, dy < 0);
+        });
+      }
+
+      function tickYas() {
+        const y = step(yas.y, yas.y0), dy = y - yas.y;
+        yas.px = yas.px * (1 - yas.dur * dy / 100);
+        yas.y = y;
+        pxEl.textContent = fmt(yas.px, 4);
+        yEl.textContent = fmt(yas.y, 4);
+        pvEl.textContent = fmt(yas.dur * yas.px / 10000, 4);
+        pxEl.className = dy < 0 ? 'gs-up' : 'gs-dn';
+      }
+
+      // the cursor sweeps the curve like a hover, 0Y to 20Y and back
+      let ct = 0.1, dir = 1, sel = 0, timers = [], raf = 0, drawn = false;
+      function sweep() {
+        ct += dir * 0.035;
+        if (ct > 19.8 || ct < 0.1) dir = -dir;
+        cursor(ct);
+        raf = requestAnimationFrame(sweep);
+      }
+
+      function highlight() {
+        track.querySelectorAll('.sel').forEach(r => r.classList.remove('sel'));
+        sel = (sel + 3) % bonds.length;
+        track.querySelectorAll(`[data-i="${sel}"]`).forEach(r => r.classList.add('sel'));
+      }
+
+      function start() {
+        if (timers.length) return;
+        if (!drawn) {
+          drawn = true;
+          now.style.strokeDasharray = len;
+          now.style.strokeDashoffset = len;
+          now.getBoundingClientRect();
+          now.style.transition = 'stroke-dashoffset 2.2s cubic-bezier(.4,.1,.2,1)';
+          now.style.strokeDashoffset = 0;
+        }
+        timers = [setInterval(tickBond, 260), setInterval(tickYas, 1100), setInterval(highlight, 1800)];
+        raf = requestAnimationFrame(sweep);
+      }
+      function stop() {
+        timers.forEach(clearInterval);
+        timers = [];
+        cancelAnimationFrame(raf);
+      }
+      new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? start() : stop()), { threshold: 0.2 })
+        .observe(document.getElementById('gsec'));
+    })();
+
+    // DSE close ticker: indices, then the most-traded stocks, from the day's close
+    (function () {
+      const bar = document.getElementById('dseTk');
+      if (!bar) return;
+      const el = (tag, cls, text) => {
+        const e = document.createElement(tag);
+        if (cls) e.className = cls;
+        if (text !== undefined) e.textContent = text;
+        return e;
+      };
+      const num = (n, d) => n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+      const dir = p => p > 0 ? 'up' : p < 0 ? 'dn' : 'fl';
+      const arrow = p => p > 0 ? '▲' : p < 0 ? '▼' : '■';
+      const sign = n => n > 0 ? '+' : '';
+      const MON = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+      function item(sym, px, chText, p, cls) {
+        const it = el('span', 'tk-item' + (cls ? ' ' + cls : ''));
+        it.append(el('span', 'tk-sym', sym), el('span', 'tk-px', px), el('span', 'tk-ch ' + dir(p), chText));
+        return it;
+      }
+
+      function render(d) {
+        if (!d || !d.stocks || !d.stocks.length) return;
+        const [y, m, day] = d.trade_date.split('-');
+        document.getElementById('tkDate').textContent =
+          `${day} ${MON[m - 1]} ${y}` + (d.turnover_mn ? ` · TK ${num(d.turnover_mn, 0)} MN` : '');
+
+        const track = document.getElementById('tkTrack');
+        const one = document.createDocumentFragment();
+        d.indices.forEach(i => one.append(
+          item(i.t, num(i.v, 2), `${arrow(i.p)} ${sign(i.c)}${num(i.c, 2)} (${sign(i.p)}${num(i.p, 2)}%)`, i.p, 'idx')));
+        d.stocks.forEach(s => {
+          const it = item(s.t, num(s.c, s.c >= 1000 ? 1 : 2), `${arrow(s.p)} ${sign(s.p)}${num(s.p, 2)}%`, s.p);
+          // DSE's daily circuit limit is about 10%: flag the names close to it
+          if (Math.abs(s.p) >= 9) it.append(el('span', 'tk-hot' + (s.p < 0 ? ' dn' : ''), 'NEAR CAP'));
+          one.append(it);
+        });
+        track.append(one.cloneNode(true), one);
+
+        const b = d.breadth || {};
+        const tot = (b.advanced || 0) + (b.declined || 0) + (b.unchanged || 0);
+        if (tot) {
+          document.getElementById('tkA').textContent = '▲ ' + b.advanced;
+          document.getElementById('tkU').textContent = '■ ' + b.unchanged;
+          document.getElementById('tkD').textContent = '▼ ' + b.declined;
+          document.getElementById('tkT').textContent = b.traded + ' traded';
+        } else {
+          bar.querySelector('.tk-breadth').hidden = true;
+        }
+
+        bar.hidden = false;
+        document.body.classList.add('has-ticker');
+        // constant reading speed whatever the list length: about 70 px a second
+        requestAnimationFrame(() => track.style.setProperty('--dur', (track.scrollWidth / 2 / 70) + 's'));
+        if (tot) setTimeout(() => {
+          bar.querySelector('.a').style.width = (b.advanced / tot * 100) + '%';
+          bar.querySelector('.u').style.width = (b.unchanged / tot * 100) + '%';
+          bar.querySelector('.d').style.width = (b.declined / tot * 100) + '%';
+        }, 900);
+      }
+
+      fetch('/ticker/latest.json', { cache: 'no-cache' })
+        .then(r => r.ok ? r.json() : null)
+        .then(render)
+        .catch(() => { /* no file, no ticker */ });
+    })();
 
     // smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
