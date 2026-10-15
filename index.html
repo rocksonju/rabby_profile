@@ -739,7 +739,7 @@
     /* ── LIVE TOOLS ── */
     .live-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 1px;
       background: var(--line);
       border-radius: var(--r);
@@ -1599,6 +1599,255 @@
       .tk-view { overflow-x: auto; }
     }
 
+    /* ── MARKET BRIEF HERO (reads /briefs/manifest.json and the briefs themselves) ── */
+    .brief-hero {
+      --bo: #fb8b1e;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 3rem;
+      align-items: center;
+      padding: 3rem 2.75rem;
+      margin-bottom: 2.5rem;
+      border-radius: var(--r);
+      border: 1px solid var(--line-2);
+      background:
+        radial-gradient(60% 80% at 0% 0%, rgba(0, 255, 136, 0.08), transparent 60%),
+        radial-gradient(60% 80% at 100% 100%, rgba(251, 139, 30, 0.05), transparent 60%),
+        var(--bg-1);
+      overflow: hidden;
+      scroll-margin-top: 110px;
+    }
+
+    .brief-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(70% 70% at 30% 50%, #000, transparent);
+      -webkit-mask-image: radial-gradient(70% 70% at 30% 50%, #000, transparent);
+      pointer-events: none;
+    }
+
+    .brief-copy,
+    .brief-stage {
+      position: relative;
+      z-index: 1;
+      min-width: 0;
+    }
+
+    .brief-stage { order: -1; }
+
+    .brief-title em {
+      color: var(--accent);
+      text-shadow: 0 0 34px var(--accent-glow);
+    }
+
+    .brief-mods li:hover { background: rgba(0, 255, 136, 0.05); }
+    .brief-mods b { color: var(--accent); }
+
+    /* the reader window */
+    .bw-win {
+      display: block;
+      text-decoration: none;
+      color: #e9e9e9;
+      background: #0b0e14;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      font-family: var(--font-mono);
+      transform: perspective(1800px) rotateY(9deg) rotateX(4deg);
+      transform-origin: 40% 50%;
+      box-shadow:
+        0 0 0 1px rgba(0, 255, 136, 0.25),
+        0 40px 110px rgba(0, 0, 0, 0.65),
+        0 0 90px rgba(0, 255, 136, 0.1),
+        30px 30px 120px rgba(251, 139, 30, 0.06);
+      transition: transform 0.7s cubic-bezier(.2, .7, .2, 1), box-shadow 0.7s;
+    }
+
+    .bw-win:hover {
+      transform: perspective(1800px) rotateY(0) rotateX(0) translateY(-4px);
+      box-shadow:
+        0 0 0 1px rgba(0, 255, 136, 0.5),
+        0 50px 120px rgba(0, 0, 0, 0.7),
+        0 0 120px rgba(0, 255, 136, 0.18);
+    }
+
+    .bw-chrome .gs-url span { color: var(--accent); }
+
+    .bw-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      letter-spacing: 0.16em;
+    }
+
+    .bw-live::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: gsBlink 1.2s steps(2) infinite;
+    }
+
+    .bw-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      background: #000;
+      border-bottom: 1px solid #1d222b;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: #6b7280;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .bw-ed {
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid #262c36;
+      color: #8a93a3;
+      transition: all 0.45s;
+    }
+
+    .bw-ed.on {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+      font-weight: 700;
+      box-shadow: 0 0 16px rgba(0, 255, 136, 0.45);
+    }
+
+    .bw-bar .sp { flex: 1; }
+    .bw-bar #bwStamp { color: var(--bo); }
+
+    .bw-view {
+      position: relative;
+      height: 384px;
+      overflow: hidden;
+      background: #0b0e14;
+    }
+
+    .bw-page {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.9s ease;
+    }
+
+    .bw-page.on { opacity: 1; }
+
+    .bw-scroll {
+      width: 680px;
+      transform-origin: 0 0;
+      will-change: transform;
+    }
+
+    .bw-scroll iframe {
+      display: block;
+      width: 680px;
+      height: 1400px;
+      border: 0;
+      pointer-events: none;
+      background: #0b0e14;
+    }
+
+    .bw-view::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(#0b0e14, transparent 7%, transparent 86%, #0b0e14);
+    }
+
+    .bw-wait {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-content: center;
+      gap: 10px;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: #6b7280;
+    }
+
+    .bw-wait b {
+      font-size: 20px;
+      letter-spacing: 0.12em;
+      color: var(--bo);
+    }
+
+    .bw-scan {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.015) 0 1px, transparent 1px 3px);
+    }
+
+    .bw-scan::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 90px;
+      background: linear-gradient(transparent, rgba(0, 255, 136, 0.05), transparent);
+      animation: gsBeam 7s linear infinite;
+    }
+
+    .bw-prog {
+      height: 2px;
+      background: #12161f;
+    }
+
+    .bw-prog i {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--bo));
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    @media(max-width:980px) {
+      .brief-hero {
+        grid-template-columns: 1fr;
+        padding: 2.25rem 1.75rem;
+      }
+
+      .brief-stage { order: 0; }
+
+      .bw-win,
+      .bw-win:hover {
+        transform: none;
+      }
+    }
+
+    @media(max-width:640px) {
+      .brief-hero {
+        padding: 1.75rem 1.1rem;
+        gap: 2rem;
+      }
+
+      .bw-view { height: 320px; }
+      .bw-bar .hide-sm { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bw-scan::after,
+      .bw-live::before {
+        animation: none;
+      }
+    }
+
     /* ── NOW / FOCUS ── */
     .focus-grid {
       display: grid;
@@ -1962,7 +2211,7 @@
       <li><a href="#gsec" class="nav-new">GSEC</a></li>
       <li><a href="#live">Live</a></li>
       <li><a href="#now">Now</a></li>
-      <li><a href="/brief/">Brief</a></li>
+      <li><a href="#brief">Brief</a></li>
       <li><a href="mailto:rabby@rabbyz.com" class="btn nav-cta">Say hi →</a></li>
     </ul>
   </nav>
@@ -2297,24 +2546,60 @@
           </div>
         </div>
 
-        <div class="live-grid reveal">
-          <a class="live-card" href="/brief/">
-            <span class="live-badge"><span class="live-dot"></span>Live · Auto-updating</span>
-            <h3 class="live-title">Bangladesh Market Brief</h3>
-            <p class="live-desc">
-              Twice-daily capital-market intelligence terminal — DSE session recap, macro,
-              money market, companies &amp; regulatory headlines. Auto-published every morning
-              (9 AM) and evening (6 PM), browsable date-wise with a morning/evening toggle.
+        <div class="brief-hero reveal" id="brief">
+          <div class="brief-copy">
+            <span class="live-badge"><span class="live-dot"></span>Live · Auto-published</span>
+            <h3 class="gsec-title brief-title">Market <em>Brief</em></h3>
+            <p class="gsec-lede">
+              Bangladesh capital-market intelligence, published twice every trading day without
+              anyone pressing a button. Prices, indices and headlines come from my Optimus data
+              hub, sentiment from a FinBERT model, and the edition is rendered and pushed to this
+              site on schedule &mdash; morning before the bell, evening after the close.
             </p>
-            <div class="live-foot">
-              <div class="live-tags">
-                <span class="tag">DSE</span>
-                <span class="tag">FinBERT</span>
-                <span class="tag">Auto-published</span>
-              </div>
-              <span class="live-open">Open brief &rarr;</span>
+            <ul class="gsec-mods brief-mods">
+              <li><b>Morning edition</b>Last 24h at a glance, DSE update, companies, macro, regulatory</li>
+              <li><b>Evening edition</b>DSE close, sector flows, client &amp; category mix, block trades</li>
+              <li><b>Announcements</b>The DSE disclosures that matter, sorted by type</li>
+              <li><b>Archive</b>Every edition since June 2026, browsable by date</li>
+            </ul>
+            <div class="gsec-stats">
+              <div><strong id="bwCount">150+</strong>briefs published</div>
+              <div><strong id="bwDays">80+</strong>trading days</div>
+              <div><strong>2&times;</strong>a day, Sun&ndash;Thu</div>
             </div>
-          </a>
+            <div class="gsec-ctas">
+              <a href="/brief/" class="btn btn-primary">Read the latest brief &rarr;</a>
+              <span class="tag">DSE</span>
+              <span class="tag">FinBERT</span>
+              <span class="tag">Optimus hub</span>
+            </div>
+          </div>
+
+          <div class="brief-stage">
+            <a class="bw-win" href="/brief/" aria-label="Read the latest Market Brief">
+              <div class="gs-chrome bw-chrome" aria-hidden="true">
+                <span class="gs-dots"><i></i><i></i><i></i></span>
+                <span class="gs-url"><span>https://</span>rabbyz.com/brief/</span>
+                <span class="bw-live">LIVE</span>
+              </div>
+              <div class="bw-bar" aria-hidden="true">
+                <span class="bw-ed" data-ed="morning">☀ MORNING</span>
+                <span class="bw-ed" data-ed="evening">☾ EVENING</span>
+                <span class="sp"></span>
+                <span class="hide-sm">PUBLISHED</span>
+                <span id="bwStamp"></span>
+              </div>
+              <div class="bw-view" aria-hidden="true">
+                <div class="bw-wait"><b>BANGLADESH UPDATES</b>OPEN THE LATEST BRIEF</div>
+              </div>
+              <div class="bw-prog" aria-hidden="true"><i id="bwProg"></i></div>
+              <div class="bw-scan"></div>
+            </a>
+            <p class="gsec-note">The real latest editions, straight from the archive &middot; click to read</p>
+          </div>
+        </div>
+
+        <div class="live-grid reveal">
           <a class="live-card" href="/calc/">
             <span class="live-badge"><span class="live-dot"></span>Live · Free tool</span>
             <h3 class="live-title">Portfolio Avg Calculator</h3>
@@ -2766,6 +3051,116 @@
         .then(r => r.ok ? r.json() : null)
         .then(render)
         .catch(() => { /* no file, no ticker */ });
+    })();
+
+    // Market Brief reader: the latest morning and evening editions, scrolled in turn
+    (function () {
+      const win = document.querySelector('.bw-win');
+      if (!win) return;
+      const view = win.querySelector('.bw-view');
+      const prog = document.getElementById('bwProg');
+      const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const W = 680;  // briefs are laid out at 640px plus their outer padding
+      const MON = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+      function stamp(iso) {
+        // manifest time is UTC; the briefs run on Dhaka time (UTC+6)
+        const d = new Date(new Date(iso).getTime() + 6 * 3600e3);
+        const hh = String(d.getUTCHours()).padStart(2, '0'), mm = String(d.getUTCMinutes()).padStart(2, '0');
+        return `${d.getUTCDate()} ${MON[d.getUTCMonth()]} · ${hh}:${mm} BDT`;
+      }
+
+      fetch('/briefs/manifest.json', { cache: 'no-cache' })
+        .then(r => r.ok ? r.json() : null)
+        .then(m => { if (m && m.briefs && m.briefs.length) start(m); })
+        .catch(() => { /* the window keeps its placeholder */ });
+
+      function start(m) {
+        const list = m.briefs;
+        document.getElementById('bwCount').textContent = list.length;
+        document.getElementById('bwDays').textContent = new Set(list.map(b => b.date)).size;
+        if (m.updated) document.getElementById('bwStamp').textContent = stamp(m.updated);
+
+        // newest edition first, then the newest of the other edition
+        const newest = list[list.length - 1];
+        const other = [...list].reverse().find(b => b.edition !== newest.edition);
+        const pages = [newest, other].filter(Boolean).map(b => {
+          const page = document.createElement('div');
+          page.className = 'bw-page';
+          const scroll = document.createElement('div');
+          scroll.className = 'bw-scroll';
+          const frame = document.createElement('iframe');
+          frame.src = '/briefs/' + b.file;
+          frame.title = `${b.edition} brief ${b.date}`;
+          frame.tabIndex = -1;
+          frame.setAttribute('sandbox', 'allow-same-origin');
+          scroll.append(frame);
+          page.append(scroll);
+          view.append(page);
+          const p = { b, page, scroll, frame, h: 1400, pos: 0 };
+          frame.addEventListener('load', () => {
+            try { p.h = frame.contentDocument.documentElement.scrollHeight || p.h; } catch (e) { /* keep the default */ }
+            frame.style.height = p.h + 'px';
+            const wait = view.querySelector('.bw-wait');
+            if (wait) wait.remove();
+          });
+          return p;
+        });
+
+        let scale = 1;
+        const fit = () => { scale = view.clientWidth / W; pages.forEach(place); };
+        const maxPos = p => Math.max(0, p.h - view.clientHeight / scale);
+        function place(p) {
+          p.scroll.style.transform = `scale(${scale}) translateY(${-p.pos}px)`;
+        }
+        window.addEventListener('resize', fit);
+        fit();
+
+        let cur = 0, phase = 'top', wait = 1600, last = 0, raf = 0, hover = false, seen = false;
+        function show(i) {
+          cur = i;
+          pages.forEach((p, j) => p.page.classList.toggle('on', j === i));
+          win.querySelectorAll('.bw-ed').forEach(e => e.classList.toggle('on', e.dataset.ed === pages[i].b.edition));
+          pages[i].pos = 0;
+          place(pages[i]);
+          prog.style.width = '0';
+          phase = 'top';
+          wait = 1600;
+        }
+        show(0);
+        if (still) return;
+
+        function tick(t) {
+          const dt = last ? Math.min(t - last, 100) : 0;
+          last = t;
+          const p = pages[cur];
+          if (phase === 'top' || phase === 'end') {
+            wait -= dt;
+            if (wait <= 0) {
+              if (phase === 'top') phase = 'run';
+              else show((cur + 1) % pages.length);
+            }
+          } else {
+            const max = maxPos(p);
+            // no edition takes more than about 32 s to read through
+            const speed = Math.max(55, max / 32);
+            p.pos = Math.min(max, p.pos + speed * dt / 1000);
+            place(p);
+            prog.style.width = (max ? p.pos / max * 100 : 100) + '%';
+            if (p.pos >= max) { phase = 'end'; wait = 1500; }
+          }
+          raf = requestAnimationFrame(tick);
+        }
+        function run() {
+          cancelAnimationFrame(raf);
+          last = 0;
+          if (seen && !hover) raf = requestAnimationFrame(tick);
+        }
+        win.addEventListener('mouseenter', () => { hover = true; run(); });
+        win.addEventListener('mouseleave', () => { hover = false; run(); });
+        new IntersectionObserver(es => es.forEach(e => { seen = e.isIntersecting; run(); }), { threshold: 0.2 })
+          .observe(win);
+      }
     })();
 
     // smooth scroll

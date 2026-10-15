@@ -28,7 +28,7 @@ Everything lives in `index.html`:
 
 - **CSS custom properties** at `:root` — all colours (`--bg-*`, `--ink-*`, `--accent`), fonts, spacing (`--section-y: 9rem`, `--r: 18px`)
 - **Fonts** via Google Fonts: Syne (display/body), JetBrains Mono, Instrument Serif
-- **Sections** in order: hero → marquee → about → career → projects → live (GSEC Analyzer hero `#gsec`, then the tool cards) → now → contact → footer
+- **Sections** in order: hero → marquee → about → career → projects → live (GSEC Analyzer hero `#gsec`, Market Brief hero `#brief`, then the tool cards) → now → contact → footer
 - **JS** (inline, ~50 lines): kinetic wordmark hover, cursor-tracked blob, IntersectionObserver scroll reveals, smooth scroll
 
 ## Key Design Constraints
@@ -43,4 +43,5 @@ Everything lives in `index.html`:
 - Mobile overrides at `max-width: 430px` — targets iPhone 16 Pro/Pro Max; blob hidden, `100svh` hero, tighter spacing
 - Footer has hits.sh visitor badge: `hits.sh/rabbyz.com.svg` with `color=00ff88`
 - GSEC Analyzer hero: an animated mock terminal built from an embedded GSOM snapshot (`GS_META`, `GS_BONDS`, `GS_YAS`, `GS_CURVE`, `GS_PREV` in the script; labels and dates follow `GS_META`). gsec.rabbyz.com sends no CORS headers, so the page cannot read it live; refresh with `python tools/refresh_gsec_snapshot.py` (rewrites both index.html copies)
+- Market Brief hero: reads `/briefs/manifest.json` and shows the newest morning and evening editions in sandboxed iframes it scrolls in turn; counts and the publish stamp come from the manifest. Nothing to refresh by hand
 - DSE close ticker (fixed bottom bar) reads `/ticker/latest.json`. Morning_News writes that file (`news/ticker.py`, run by `publish_briefs.py` on the publishing node) from the Optimus hub; never hand-edit it. No file → the bar stays hidden
