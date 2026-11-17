@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  BD MARKETS TERMINAL BRIEF — Bloomberg-style dark email template
+  ================================================================
+  PLACEHOLDERS (replace at build time):
+    MORNING BRIEF        MORNING BRIEF | EVENING BRIEF
+    TUE 17 NOV 2026      e.g. FRI 03 JUL 2026
+    2026-11-17       e.g. 2026-07-03
+    DSEX 5,463.28 ▲0.05% · TURNOVER TK798.74CR · DS30 2,075.42 · LAST SESSION: 16 NOV    one-line market strip, e.g.
+                       DSEX 5,762 ▲1.17% · TURNOVER TK1,439CR · DS30 2,166
+                       or: DSE CLOSED TODAY (FRI) · LAST SESSION THU 02 JUL
+    39          total headline count
+    CAP MKT 4 · COMPANIES 7 · MACRO 8 · MONEY MKT 4 · REGULATORY 6 · SECTOR 10     per-category counts, e.g. CAP MKT 1 · COMPANIES 4 · MACRO 7 ...
+    <!--SECTION:xx-->  repeat the SECTION block per category IN THIS ORDER:
+                       01 CAPITAL MARKET / 02 COMPANIES / 03 MACRO ECONOMY /
+                       04 MONEY MARKET & POLICY / 05 REGULATORY / 06 SECTOR NEWS
+                       (omit a section entirely if it has zero items)
+    <!--ITEM-->        repeat the ITEM block per headline inside each section
+  RULES:
+    - Inline CSS + table layout + bgcolor attributes only (email-safe).
+    - Colors: bg #0B0E14, panel #12161F, amber #FB8B1E, headline #FFFFFF,
+      body #A8B0BD, muted #6B7280, hairline #232833.
+    - Mono ('Courier New') for labels/tickers; Arial for headlines/summaries.
+    - Sector chip only when a sector tag exists.
+-->
+<body style="margin:0;padding:0;background-color:#0B0E14;" bgcolor="#0B0E14">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#0B0E14" style="background-color:#0B0E14;">
+<tr><td align="center" style="padding:18px 10px;">
+<table role="presentation" width="640" cellpadding="0" cellspacing="0" style="max-width:640px;width:100%;">
+
+  <!-- MASTHEAD -->
+  <tr><td bgcolor="#000000" style="background-color:#000000;padding:18px 22px 14px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td align="left" style="font-family:'Courier New',Consolas,monospace;">
+        <span style="color:#FB8B1E;font-size:22px;font-weight:bold;letter-spacing:2px;">BANGLADESH&nbsp;UPDATES</span><br>
+        <span style="color:#FFFFFF;font-size:11px;letter-spacing:6px;">MORNING BRIEF</span>
+      </td>
+      <td align="right" style="font-family:'Courier New',Consolas,monospace;color:#6B7280;font-size:11px;letter-spacing:1px;">
+        TUE 17 NOV 2026<br><span style="color:#FB8B1E;">DHAKA&nbsp;·&nbsp;GMT+6</span>
+      </td>
+    </tr></table>
+  </td></tr>
+  <tr><td height="3" bgcolor="#FB8B1E" style="background-color:#FB8B1E;font-size:0;line-height:0;">&nbsp;</td></tr>
+
+  <!-- TICKER STRIP -->
+  <tr><td bgcolor="#12161F" style="background-color:#12161F;padding:9px 22px;border-bottom:1px solid #232833;">
+    <span style="font-family:'Courier New',Consolas,monospace;font-size:11px;color:#A8B0BD;letter-spacing:1px;">DSEX 5,463.28 ▲0.05% · TURNOVER TK798.74CR · DS30 2,075.42 · LAST SESSION: 16 NOV</span>
+  </td></tr>
+
+  <!-- AT A GLANCE -->
+  <tr><td bgcolor="#0B0E14" style="background-color:#0B0E14;padding:16px 22px 4px;">
+    <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;letter-spacing:3px;">AT&nbsp;A&nbsp;GLANCE&nbsp;—&nbsp;39&nbsp;HEADLINES&nbsp;(LAST&nbsp;24H)</span><br>
+    <span style="font-family:'Courier New',Consolas,monospace;font-size:11px;color:#6B7280;">CAP MKT 4 · COMPANIES 7 · MACRO 8 · MONEY MKT 4 · REGULATORY 6 · SECTOR 10</span>
+  </td></tr>
+
+  <!-- DSE UPDATE (always first, before news sections) ==================
+       Data sources (fetch at build time; on scheduled runs use web_fetch,
+       and if it returns an empty body use Claude-in-Chrome navigate +
+       get_page_text — dsebd.org often needs TWO navigations, first one
+       redirects to index.php):
+         index/turnover : https://old.dsebd.org/index.php
+         top turnover   : https://old.dsebd.org/top_20_share.php (or the
+                          "By Value" table on index.php — same data)
+         top gainers    : https://old.dsebd.org/latest_share_price_scroll_by_change.php
+       Placeholders: DSE's last session (Mon, 16 Nov) closed with DSEX at 5,463.28, up 0.05% (+2.72 points) on turnover of BDT 798.74cr. DS30 slipped 0.13% to 2,075.42 while the small-cap DSES index gained 0.38% to 1,068.93. Breadth was negative — 118 advanced, 202 declined, 58 unchanged — despite the index closing marginally higher. YTD the DSEX has returned +12.29% (base: 4,865.34 on 30 Dec 2025). Markets had not yet opened for today's session at the time of this brief. = e.g. "DSEX closed at 5,743.86,
+       returning -0.33% ... turnover BDT 1,440cr ... YTD +18.06%"
+       YTD = (DSEX_close / 4865.33685 - 1) x 100   [base: 30 Dec 2025]
+       Positive numbers #2ECC71, negative #FF4D4D. NEVER invent numbers;
+       if data unavailable, state "DSE data unavailable this run".
+  ==================================================================== -->
+  <tr><td style="padding:22px 22px 2px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td width="14" style="font-size:14px;color:#FB8B1E;font-family:Arial,sans-serif;">&#9632;</td>
+      <td style="font-family:'Courier New',Consolas,monospace;font-size:13px;font-weight:bold;color:#FFFFFF;letter-spacing:3px;">DSE&nbsp;UPDATE</td>
+    </tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" bgcolor="#232833" style="font-size:0;line-height:0;">&nbsp;</td></tr></table>
+  </td></tr>
+  <tr><td style="padding:12px 22px 0;">
+    <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.6;">DSE's last session (Mon, 16 Nov) closed with DSEX at 5,463.28, up 0.05% (+2.72 points) on turnover of BDT 798.74cr. DS30 slipped 0.13% to 2,075.42 while the small-cap DSES index gained 0.38% to 1,068.93. Breadth was negative — 118 advanced, 202 declined, 58 unchanged — despite the index closing marginally higher. YTD the DSEX has returned +12.29% (base: 4,865.34 on 30 Dec 2025). Markets had not yet opened for today's session at the time of this brief.</span>
+  </td></tr>
+  <!-- stat cards row: DSEX close / 1-day % / turnover / YTD % -->
+  <tr><td style="padding:12px 22px 0;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td width="25%" bgcolor="#12161F" align="center" style="padding:10px 4px;border:1px solid #232833;">
+        <span style="font-family:'Courier New',monospace;font-size:9px;color:#6B7280;letter-spacing:2px;">DSEX&nbsp;CLOSE</span><br>
+        <span style="font-family:'Courier New',monospace;font-size:16px;font-weight:bold;color:#FFFFFF;">5,463.28</span></td>
+      <td width="25%" bgcolor="#12161F" align="center" style="padding:10px 4px;border:1px solid #232833;">
+        <span style="font-family:'Courier New',monospace;font-size:9px;color:#6B7280;letter-spacing:2px;">1-DAY</span><br>
+        <span style="font-family:'Courier New',monospace;font-size:16px;font-weight:bold;color:#2ECC71;">+0.05%</span></td>
+      <td width="25%" bgcolor="#12161F" align="center" style="padding:10px 4px;border:1px solid #232833;">
+        <span style="font-family:'Courier New',monospace;font-size:9px;color:#6B7280;letter-spacing:2px;">TURNOVER</span><br>
+        <span style="font-family:'Courier New',monospace;font-size:16px;font-weight:bold;color:#FFFFFF;">798.74CR</span></td>
+      <td width="25%" bgcolor="#12161F" align="center" style="padding:10px 4px;border:1px solid #232833;">
+        <span style="font-family:'Courier New',monospace;font-size:9px;color:#6B7280;letter-spacing:2px;">YTD</span><br>
+        <span style="font-family:'Courier New',monospace;font-size:16px;font-weight:bold;color:#2ECC71;">+12.29%</span></td>
+    </tr></table>
+  </td></tr>
+  <!-- two mini tables: TOP 5 TURNOVER (ticker / %chg / BDT cr) and TOP 5 GAINERS (ticker / %chg / BDT cr) -->
+  <tr><td style="padding:12px 22px 0;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td width="49%" valign="top" bgcolor="#12161F" style="border:1px solid #232833;padding:10px 12px;">
+        <span style="font-family:'Courier New',monospace;font-size:10px;color:#FB8B1E;letter-spacing:2px;">TOP&nbsp;5&nbsp;TURNOVER</span>
+        <!-- one row per stock: -->
+        <table role="presentation" width="100%" cellpadding="2" cellspacing="0" style="margin-top:6px;">
+          <tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;">MALEKSPIN</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#2ECC71;">+7.31%</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#A8B0BD;">33.95</td></tr><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;">ENVOYTEX</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#2ECC71;">+5.98%</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#A8B0BD;">27.25</td></tr><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;">SPCL</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#2ECC71;">+7.30%</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#A8B0BD;">26.47</td></tr><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;">MATINSPINN</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#2ECC71;">+9.96%</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#A8B0BD;">23.87</td></tr><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;">BPPL</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#2ECC71;">+5.53%</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#A8B0BD;">23.23</td></tr>
+        </table>
+      </td>
+      <td width="2%"></td>
+      <td width="49%" valign="top" bgcolor="#12161F" style="border:1px solid #232833;padding:10px 12px;">
+        <span style="font-family:'Courier New',monospace;font-size:10px;color:#FB8B1E;letter-spacing:2px;">TOP&nbsp;5&nbsp;GAINERS</span>
+        <table role="presentation" width="100%" cellpadding="2" cellspacing="0" style="margin-top:6px;">
+          <tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;">WATACHEM</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#2ECC71;">+10.00%</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#A8B0BD;">4.87</td></tr><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;">MATINSPINN</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#2ECC71;">+9.96%</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#A8B0BD;">23.87</td></tr><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;">ISLAMIBANK</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#2ECC71;">+9.83%</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#A8B0BD;">0.62</td></tr><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;">DOREENPWR</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#2ECC71;">+9.77%</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#A8B0BD;">15.15</td></tr><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;">SPCERAMICS</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#2ECC71;">+7.61%</td><td align="right" style="font-family:'Courier New',monospace;font-size:11px;color:#A8B0BD;">17.67</td></tr>
+        </table>
+      </td>
+    </tr></table>
+  </td></tr>
+  <tr><td style="padding:8px 22px 0;">
+    <span style="font-family:'Courier New',monospace;font-size:9px;color:#6B7280;letter-spacing:1px;">SOURCE:
+    <a href="https://old.dsebd.org/index.php" style="color:#6B7280;">OLD.DSEBD.ORG</a> ·
+    <a href="https://old.dsebd.org/top_20_share.php" style="color:#6B7280;">TOP-20</a> ·
+    <a href="https://old.dsebd.org/latest_share_price_scroll_by_change.php" style="color:#6B7280;">GAINERS</a></span>
+  </td></tr>
+  <tr><td style="padding:16px 22px 0;">
+    <span style="font-family:'Courier New',monospace;font-size:10px;color:#FB8B1E;letter-spacing:2px;">IMPORTANT&nbsp;DSE&nbsp;ANNOUNCEMENTS&nbsp;·&nbsp;16&nbsp;NOV</span>
+  </td></tr>
+<tr><td style="padding:12px 22px 0;"><span style="font-family:'Courier New',monospace;font-size:10px;color:#FB8B1E;letter-spacing:2px;">BOARD MEETING</span><table role="presentation" width="100%" cellpadding="3" cellspacing="0" bgcolor="#12161F" style="border:1px solid #232833;margin-top:6px;"><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;padding:2px 10px;">SEAPEARL</td><td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#A8B0BD;padding:2px 10px;">Board Meeting schedule under LR 19(1)</td></tr><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;padding:2px 10px;">DSHGARME</td><td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#A8B0BD;padding:2px 10px;">Reschedule of Board Meeting under LR 16(1)</td></tr><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;padding:2px 10px;">BAYLEASING</td><td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#A8B0BD;padding:2px 10px;">Board Meeting schedule under LR 16(1)</td></tr></table></td></tr><tr><td style="padding:12px 22px 0;"><span style="font-family:'Courier New',monospace;font-size:10px;color:#FB8B1E;letter-spacing:2px;">DIVIDEND ANNOUNCEMENT</span><table role="presentation" width="100%" cellpadding="3" cellspacing="0" bgcolor="#12161F" style="border:1px solid #232833;margin-top:6px;"><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;padding:2px 10px;">BESTHLDNG</td><td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#A8B0BD;padding:2px 10px;">Dividend Declaration</td></tr></table></td></tr><tr><td style="padding:12px 22px 0;"><span style="font-family:'Courier New',monospace;font-size:10px;color:#FB8B1E;letter-spacing:2px;">QUARTERLY DISCLOSURE</span><table role="presentation" width="100%" cellpadding="3" cellspacing="0" bgcolor="#12161F" style="border:1px solid #232833;margin-top:6px;"><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;padding:2px 10px;">BESTHLDNG</td><td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#A8B0BD;padding:2px 10px;">Q3 Financials</td></tr><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;padding:2px 10px;">AMBEEPHA</td><td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#A8B0BD;padding:2px 10px;">Q1 Financials</td></tr><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;padding:2px 10px;">AFTABAUTO</td><td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#A8B0BD;padding:2px 10px;">Q1 Financials</td></tr><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;padding:2px 10px;">ORIONINFU</td><td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#A8B0BD;padding:2px 10px;">Q1 Financials</td></tr><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;padding:2px 10px;">ORIONPHARM</td><td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#A8B0BD;padding:2px 10px;">Q1 Financials</td></tr><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;padding:2px 10px;">ACMEPL</td><td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#A8B0BD;padding:2px 10px;">Q1 Financials</td></tr><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;padding:2px 10px;">VFSTDL</td><td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#A8B0BD;padding:2px 10px;">Q1 Financials</td></tr><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;padding:2px 10px;">NAVANACNG</td><td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#A8B0BD;padding:2px 10px;">Q1 Financials</td></tr></table></td></tr><tr><td style="padding:12px 22px 0;"><span style="font-family:'Courier New',monospace;font-size:10px;color:#FB8B1E;letter-spacing:2px;">DIVIDEND DISBURSEMENT</span><table role="presentation" width="100%" cellpadding="3" cellspacing="0" bgcolor="#12161F" style="border:1px solid #232833;margin-top:6px;"><tr><td style="font-family:'Courier New',monospace;font-size:11px;color:#FFFFFF;padding:2px 10px;">NAVANACNG</td><td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#A8B0BD;padding:2px 10px;">Dividend Disbursement</td></tr></table></td></tr>
+
+  
+
+    <tr><td style="padding:22px 22px 2px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td width="14" style="font-size:14px;color:#FB8B1E;font-family:Arial,sans-serif;">&#9632;</td>
+      <td style="font-family:'Courier New',Consolas,monospace;font-size:13px;font-weight:bold;color:#FFFFFF;letter-spacing:3px;">01&nbsp;/&nbsp;CAPITAL MARKET</td>
+    </tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" bgcolor="#232833" style="font-size:0;line-height:0;">&nbsp;</td></tr></table>
+  </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxNZ3dETWZ3M0NoR1dsWkxnVU1tRWpJTG5TUHNJdDNKVG9YOFRsaTFTdE1wcWJyR3hkTkkwTzczNlhlUjhsV2c2UGF0aUtpSF9JVVQ4TzhSeHRQbmZyY0ZJTkpSRzZjX0RVcHVtVzVOTG1KM29VSWMyaU1fZnhPWEFxSXBpamVnOTZ1WGVMM195WEM5MjFwTzhOTE1ObEZsRVBRUWszN2FqN09qQ194UHNnQWg1a0d0WTkzdE1sdnNOZTkxaE0yOXdhNXJpTWZvZ9IB2gFBVV95cUxQVFVlc21zN1V5R0JvWWhXc2g5OWFNQVRPbmVKb3Bhc0YzekRERV9Yb0VzaHFrMXpiZVFWQ2ViNEU1M0NzS3ZsRk9yVGpZb3A2RWdtRHU5eDAxOEY3OUxFek1EcFBROEt6NlNsTUItWU5mZjFmZlBlQ050M0VJMlM2TlE2c1J4YUZxdUVwd2dBZHFSZDJBQTdfUkJ1WUthTnhZZW1LYkpXeklpbTktOTJ2ZngxdFh5VlNlYUVIeDlSdzBkeGxGbmFkQzVJZV9oS2Nualh6NGZkdmFJdw?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Listed hotels struggle as tourism slumps, Middle East crisis bites</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE FINANCIAL EXPRESS</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">TRAVEL</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Listed hotel operators are struggling as tourism arrivals slump and the Middle East crisis weighs on travel demand.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.thedailystar.net/business/economy/news/investor-confidence-remains-fragile-amcham-4325711" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Investor confidence remains fragile: AmCham</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE DAILY STAR</span>
+          <br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Energy shortages, labour unrest, conflicting policy messages and doubts over government procurement are hurting Bangladesh’s reputation among foreign investors, according to the American Chamber of Commerce in Bangladesh (AmCham).</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.tbsnews.net/economy/stocks/islami-bank-lifts-dsex-amid-broad-market-sell-1604796" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Islami Bank lifts DSEX amid broad market sell-off</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE BUSINESS STANDARD</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">BANK</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Islami Bank shares surged 9.83% to Tk25.70 each on the Dhaka Stock Exchange (DSE) today, boosting its market capitalisation by Tk370 crore to Tk4,137.67 crore.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.tbsnews.net/economy/stocks/rising-costs-inefficiencies-weigh-listed-state-owned-firms-q1-earnings-1604781" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Rising costs, inefficiencies weigh on listed state-owned firms' Q1 earnings</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE BUSINESS STANDARD</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">BANK</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">20 state-owned companies, including Rupali Bank, are currently listed on the capital market, with a combined market capitalisation of Tk23,211 crore, accounting for 3.46% of the DSE’s total equity market capitalisation.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+  <tr><td style="padding:22px 22px 2px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td width="14" style="font-size:14px;color:#FB8B1E;font-family:Arial,sans-serif;">&#9632;</td>
+      <td style="font-family:'Courier New',Consolas,monospace;font-size:13px;font-weight:bold;color:#FFFFFF;letter-spacing:3px;">02&nbsp;/&nbsp;COMPANIES</td>
+    </tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" bgcolor="#232833" style="font-size:0;line-height:0;">&nbsp;</td></tr></table>
+  </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxQUWc0NUQtWDlUSFBQY21qUS1KQWY1WkhONV92TXJMU0F3RDVxT0RvTXNwaEVKd29ZUHl6MlBhZkZVUkNDa0V6OHE2ZW5TOUhwVklodE9wLTJyWkg2SU1LY2F3ZmJxR0ZMdWhaRnUzRUlXMUdfYmhncmNnRzhLT194UHpjOGE1RWpHVko1QlBkT0JJR2FlUkR5VlhLNGRHUWFHR1hDWEhIcVZiUVpOX254c3Vlc0lGRGpJdlHSAcYBQVVfeXFMTXFTMTFBVUlJdFd4QVZPRXBaclNNNlhsVzAtX2FyVEVNRlJDV3dzOC12VWJCNDhKM3pVeF9LS1dMdlE3cjRtSUtmM3hrRzhJZWE2Z28tWUY3TjRKdUE1VTBMb1RNZkMzblIzZzRqcmo1M0MzM1VZYWdUdzlETy1vTGxlNlRVOHExUFNiYmVVV2ZLRTlnLWtLSTNUZjFHbjVfVWM1MEVfQk5zOHJScWhJT3VTeHE5bk5XeXBCSWxuRjRGQnAyLTFn?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Orion Infusion swings to loss in Q1 on lower sales</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE FINANCIAL EXPRESS</span>
+          <br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Orion Infusion posted a Q1 loss on lower sales.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.tbsnews.net/economy/stocks/best-holdings-profit-drops-245-shares-jump-709-after-dividend-announcement-1604751" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Best Holdings' profit drops 24.5%, shares jump 7.09% after dividend announcement</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE BUSINESS STANDARD</span>
+          <br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">The dividend recommendation comes after the company declared no dividend for FY2024-25. Its earnings per share (EPS) have also declined for two consecutive years.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.tbsnews.net/economy/stocks/ambee-pharmas-earnings-decline-40-first-quarter-1604766" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Ambee Pharma's earnings decline 40% in first quarter</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE BUSINESS STANDARD</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">PHARMACEUTICALS</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Its annual earnings also weakened, with EPS falling 52% to Tk1.06 in FY26 from Tk2.21 in FY25.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.dhakatribune.com/business/424805/sahajmobile-secures-up-to-25m-for-smartphone" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">SahajMobile secures up to $25m for smartphone financing</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">DHAKA TRIBUNE</span>
+          <br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">SahajMobile has closed a credit facility with ALMA, enabling total borrowings of up to $25 million through its US holding company, HR Consortium USA, Inc. Part of its broader Series A financing led by Beacon Peak Partners, the facility will support smartphone financing for underserved customers across Bangladesh. Since launching in 2024, SahajMobile has helped tens of thousands of customers... Det</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxPS3NuTGd0SDhDNGlNbUptSDdVb1dPZTlkSHh2bUg3am5pUlBiRl9JeUtpU0NUWlpqR05PUEJzMGtxVDRhdVc2OHdnOWFsMWh3MlUzNlVvVkVYS3l2TnVNamhuRjVBdmJRdU9lajRtZWhILUVhYnNPcnhsQXVFQ3E3X3BGQjRaNVdyYUNET3FVMmw2NV9nRy1PY0cwRms?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Apex Footwear profit more than doubles in July-September</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE BANGLADESH MONITOR</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">TANNERY</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Apex Footwear's profit more than doubled in the July-September quarter.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNR1pZWWNhQnFTOWt4SmZVeGtLNHZQRmkyZ0RaT0tMOHAxcXl5Znd1NlZsdWNwMVhDQmk2OVVCY2tZWGZRdkhZN0hoaHJhdWw2MmlLeHlvTkkxTkR1aVF2UFNYdVdHempnZ084ZnZfbTNnX2N5Y0VzbjhUdVBfX05Ed3N4b2dfQnctUGtCMkczUmQweTcteDBkeEFn?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">United Power profit falls 5.5pc in Q1 on lower revenue</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE FINANCIAL EXPRESS</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">FUELPOWER</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">United Power's profit fell 5.5% in Q1 on lower revenue.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNS00zWU15MGZsaEJsWnNsRUYtdTBTNnQ3VG1TVVlWMThVWGpnXzJUY29wM0ZaYk1HQThUNjk5UjktaWlrdlJjSmctb05ETWxMUjUxZk5ncFBGS1Roc2dMcGI4QUVUVE8tTTBWcloxZ2pqWk9zem1lVTVYUGxSc0J6RFhRemliV2ktQ2dCYU5ONUlrLWJmNHZoNVNEaGNRNHJFTkI3YnJn?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Beximco Pharma eyes herbal medicine market with new subsidiary</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE FINANCIAL EXPRESS</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">PHARMACEUTICALS</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Beximco Pharma is entering the herbal medicine market through a new subsidiary.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+  <tr><td style="padding:22px 22px 2px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td width="14" style="font-size:14px;color:#FB8B1E;font-family:Arial,sans-serif;">&#9632;</td>
+      <td style="font-family:'Courier New',Consolas,monospace;font-size:13px;font-weight:bold;color:#FFFFFF;letter-spacing:3px;">03&nbsp;/&nbsp;MACRO ECONOMY</td>
+    </tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" bgcolor="#232833" style="font-size:0;line-height:0;">&nbsp;</td></tr></table>
+  </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMiVEFVX3lxTE5mci1zeVM0bDQyc2tRT3VsMGVjNmtBcFkyZjVfVFE3X3lwdzJDclFmZXFWVzRFa0YxYnRKLXdRUF9WVHRSc2pKeTFId2hPWkRpc2tPdQ?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Bangladesh spends just 6.53% of development budget in July-October, lowest rate on record</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">BDNEWS24.COM</span>
+          <br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Bangladesh spent just 6.53% of its development budget in July-October, the lowest rate on record.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxPSWRSX3J0QjluS3ZVTDRZV01BcVVWbUFtNGVhdER3bjdVazAyN1NPcklkakhnM3FLQjBuTVhOV3l3SzVPUXB3VUh1dDZmWURDYWVCX0c4eXJ0Q19DcWpXTXN5OTVnLUxpUFcwX2w1d29WTHhKenhVdnZXYzk2MUhaM19WSlNfRDNZd0xoTzZHRi0xZVhweS1ZclE1ZzVneE1YVXRmV1hKX24wWE9JN3BESG11WjPSAbQBQVVfeXFMT0lkUl9ydEI5bkt2VUw0WVdNQXFVVm1BbTRlYXREd243VWswMjdTT3JJZGpIZzNxS0Iwbk1YTld5d0s1T1Fwd1VIdXQ2ZllEQ2FlQl9HOHlydENfQ3FqV01zeTk1Zy1MaVBXMF9sNXdvVkx4Snp4VXZ2V2M5NjFIWjNfVkpTX0QzWXdMaE82R0YtMWVYcHktWXJRNWc1Z3hNWFV0ZldYSl9uMFhPSTdwREhtdVoz?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">BB sells $100m more to keep forex mkt stable</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE FINANCIAL EXPRESS</span>
+          <br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">BB sells $100m more to keep forex mkt stable</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMiUEFVX3lxTE1HdWF4RnlKeS1RNXV1QVBjNnViTlZSTURtRWF1c1o3Y0tLcndxUVJaMV8wT2hlSkl4a0tnTUROQk9IS3BNdnE2Q3JuNG5acjgz?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Remittance inflow rises 14.2pc to $13.33 billion in FY27 so far</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">BANGLADESH SANGBAD SANGSTHA (BSS)</span>
+          <br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Remittance inflow rose 14.2% year-on-year to $13.33 billion in FY27 so far.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.tbsnews.net/economy/stocks/adb-keen-support-bangladeshs-capital-market-development-1604761" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">ADB keen to support Bangladesh's capital market development</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE BUSINESS STANDARD</span>
+          <br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Discussions covered capital market’s role in expanding the private sector, creating new investment opportunities and advancing market development.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.tbsnews.net/economy/cenbank-governor-urges-restraint-ramadan-profits-importers-voice-dollar-concerns-1604726" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Cenbank governor urges restraint on Ramadan profits; importers voice dollar concerns</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE BUSINESS STANDARD</span>
+          <br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Importers say adequate stocks are in place but warn that price stability depends on a manageable dollar exchange rate.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE9tZmVJR240dVlKYVhMMnl0VzVVVjVBWUoydXkwVlhUY3gyMEk0TlplM0RDU0oxZTBlLVBLZEctR1Z6RFZ5aEtULTVUa1FtVTA1T3ln?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Govt takes comprehensive measures for smooth LDC graduation: Finance Minister</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">BANGLADESH SANGBAD SANGSTHA (BSS)</span>
+          <br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Govt takes comprehensive measures for smooth LDC graduation: Finance Minister</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.dhakatribune.com/business/424776/khasru-imf-loan-talks-to-conclude-by-jan-feb%E2%80%9927" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Khasru: IMF loan talks to conclude by Jan-Feb’27</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">DHAKA TRIBUNE</span>
+          <br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Finance and Planning Minister Amir Khasru Mahmud Chowdhury on Sunday said discussions with the International Monetary Fund (IMF) on its new loan program are expected to conclude by January-February next year. The government has no plan to withdraw from the IMF’s new loan program, but it is working to align the lender’s conditions and program with the country’s current... Details</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTE1KM0FacWtZWFV1MEc5TUNyTmI5NEtqUm1hVFFWTGZrS3JhS09qX21hVV9TREVYZ1FyTUFLbTdKV0VjS2xvcTRqemNVSkdQYUJZay1yQmtvN0Z2d1hLNGFQaFp0TVJqWDY4OTBz?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">BB Offers Tk50,000 Collateral-Free Loans Without Visiting a Bank</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">RTV NEWS</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">BANK</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Bangladesh Bank is offering Tk50,000 collateral-free loans without requiring a bank visit.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+  <tr><td style="padding:22px 22px 2px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td width="14" style="font-size:14px;color:#FB8B1E;font-family:Arial,sans-serif;">&#9632;</td>
+      <td style="font-family:'Courier New',Consolas,monospace;font-size:13px;font-weight:bold;color:#FFFFFF;letter-spacing:3px;">04&nbsp;/&nbsp;MONEY MARKET & POLICY</td>
+    </tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" bgcolor="#232833" style="font-size:0;line-height:0;">&nbsp;</td></tr></table>
+  </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.thedailystar.net/business/economy/news/agri-machinery-irrigation-receive-less-1-farm-credit-4325631" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Agri machinery, irrigation receive less than 1% of farm credit</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE DAILY STAR</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">BANK</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Banks disbursed less than 1 percent of their total agricultural and rural credit to irrigation and farm equipment during the first quarter of fiscal year 2026-27, falling short of the 2 percent target set by Bangladesh Bank (BB).</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.tbsnews.net/economy/defaulted-loans-fall-tk9400cr-q3-tk597-lakh-crore-finmin-1604801" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Defaulted loans fall Tk9,400cr in Q3 to Tk5.97 lakh crore: FinMin</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE BUSINESS STANDARD</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">BANK</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Bad loans accounted for 32.17% of total bank loans at the end of September, down from 32.26% in June, according to the finance minister.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.thedailystar.net/business/news/nbr-extends-online-vat-return-deadline-7-days-amid-server-hitches-4325431" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">NBR extends online VAT return deadline by 7 days amid server hitches</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE DAILY STAR</span>
+          <br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">The National Board of Revenue (NBR) has extended the deadline for submitting online VAT returns for October 2026 by seven days after server complications disrupted the filing process.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.tbsnews.net/economy/tu-vat-collection-hits-record-tk8526-crore-october-1604121" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">LTU VAT collection hits record Tk8,526 crore in October</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE BUSINESS STANDARD</span>
+          <br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">This represents year-on-year growth of 34.47%, according to a press release.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+  <tr><td style="padding:22px 22px 2px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td width="14" style="font-size:14px;color:#FB8B1E;font-family:Arial,sans-serif;">&#9632;</td>
+      <td style="font-family:'Courier New',Consolas,monospace;font-size:13px;font-weight:bold;color:#FFFFFF;letter-spacing:3px;">05&nbsp;/&nbsp;REGULATORY</td>
+    </tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" bgcolor="#232833" style="font-size:0;line-height:0;">&nbsp;</td></tr></table>
+  </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMiUEFVX3lxTE1heHRUWVYzRjdhQ1NxLWtVamtjYVFxdG8tVlBZN3ZGTmVFZEJjMU9QZ2l0OXRseTdRRnY3SVRJbG9HVDd1SjdDeUtBcWIzdHZq?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">BSEC, University of Michigan's WDI hold investment readiness workshop for midcap enterprises</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">BANGLADESH SANGBAD SANGSTHA (BSS)</span>
+          <br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">BSEC and the University of Michigan's WDI jointly held an investment-readiness workshop for midcap enterprises.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.tbsnews.net/economy/insurers-being-forced-sell-land-settle-outstanding-claims-khosru-1604421" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">New law if needed to crackdown on errant insurers: FinMin</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE BUSINESS STANDARD</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">INSURANCE</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">A total of Tk84.06cr in insurance claims had been paid to 22,030 policyholders of eight troubled insurance companies through the IDRA, he says.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.dhakatribune.com/business/banks/424774/bb-to-auction-tk3-000cr-govt-investment-sukuk-on" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">BB to auction Tk3,000cr govt investment Sukuk on December 1</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">DHAKA TRIBUNE</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">BANK</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Bangladesh Bank (BB) will hold an auction of the second Short-Term Bangladesh Government Investment Sukuk (BGIS) worth Tk3,000 crore on December 1, 2026, to finance the 'Important Rural Infrastructures Development Project on Priority Basis'. The 182-day Short-Term BGIS will be issued through the Ijarah method. The auction will be conducted through the central bank's Shariah Securities Module... De</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMiZkFVX3lxTE1od3ZESEE1ZnZTX0RTNGdSUXlKaGtWLTg5bGhIUHVWVTZJbVdnQVB2WEhUTExsMUNxLTY1WVFjTHBESWV1OEZyN1RzcW9YZjlxTWFKTWstSXczZGt6bU1NVWJ5QUMwZw?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Bangladesh Bank Warns Banks Against Unnecessary Dollar Buying - https://www.businesstimes-bd.com/</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">HTTPS://WWW.BUSINESSTIMES-BD.COM/</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">BANK</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Bangladesh Bank Warns Banks Against Unnecessary Dollar Buying - https://www.businesstimes-bd.com/</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.thedailystar.net/business/news/govt-appoints-wahid-uz-zaman-btrc-chairman-4325161" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Govt appoints Wahid-Uz-Zaman as BTRC chairman</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE DAILY STAR</span>
+          <br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">The government has appointed Md Wahid-Uz-Zaman, a retired major general, as chairman of the Bangladesh Telecommunication Regulatory Commission (BTRC) on a one-year contract.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.tbsnews.net/economy/banking/ifc-wants-lend-taka-through-currency-swap-1603821" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">IFC wants to lend in taka through currency swap</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE BUSINESS STANDARD</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">BANK</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Economists and businesses welcome the move as Bangladesh Bank weighs the proposal.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+  <tr><td style="padding:22px 22px 2px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td width="14" style="font-size:14px;color:#FB8B1E;font-family:Arial,sans-serif;">&#9632;</td>
+      <td style="font-family:'Courier New',Consolas,monospace;font-size:13px;font-weight:bold;color:#FFFFFF;letter-spacing:3px;">06&nbsp;/&nbsp;SECTOR NEWS</td>
+    </tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" bgcolor="#232833" style="font-size:0;line-height:0;">&nbsp;</td></tr></table>
+  </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxOTHVMbHFxN0FFdV9KNERGbUpzUnUtUlJmUDdxNGtDWmlXaUpoLW5JckktSnJjYVJsSUxPb2lfWjRhQXV1YTljeG9rRXlLcEYwenFMd0R2ZGtMUy1qTGpTUDBLNUxFcVFpcWQ4blVxallVeDVScVJoSkJpTkg2aWdYLWNBaXFzSEdIUEdaN01nbHhodG9rMGRSY01wMEltWklBX1l3?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">RMG wage board meet postponed due to worker rep's absence</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">NEW AGE BD</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">TEXTILE</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">The RMG minimum wage board meeting was postponed after a worker representative failed to attend.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMiggJBVV95cUxQTDlRekRodFY1dnZ6ZGxGV0stU3h2VW1SQml2cG1kRFFqcDE1bnM5SE4zMjI2ZmgyMFJZY2RMeGVhdFVSWVNURzNQVW9XYnhoUnJISlVIMFNycE5ldHNiMU54T1FMTjM2dGZveGthQmI2RnU3SS1QNHBUSjg3cFl6RWtyNTVSdXFuTEgycjl1MURlZmc5TjlEbmRKaDRhbUEwS28tbDV6aW1xdHhqNTJkRVliaE9HbnlOVzMyNE44aE9YeURNdlBEUE12TmNnYVc3WjlmWkJYZnJkMXFUS01PdGtyVTFLSFVJY3lkM0g1am9ia3Fud19QTXhMZElzVzVFbWfSAYcCQVVfeXFMTVJPRTUtbktNcjRnVGhhc2VtUXdrMDNINkRkZHNZdlFFQVlnSFdqc0ZpNWNIQ2ZCZmNhRWVwZ2RaMG9oVU9ObHFITXRwRlg2a2drLU8yQ0czUy1VenBNdXBfQXFtYUpFbUZqSzNoMnNWbGdPX1c1M2VSR0xjLUpBS1VOMlUtSFpqX1I5Sng5SFJUUHpQbS1mb3d1RWpoV2ExY1gzczJ2NExxaXdyWkozd3lvRS1sY0FFMkd3ak4tLUYwcHRNemFDaGZVSWFBRVhwQ0JqbXNKRUN5NFN4T2hBSEMzbHVoZ2IxZ2tvVTJ2eFNKd1VuaEZubTlKdjIzWlZPT2RVY2FOMkU?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Bangladesh’s $40 billion garment industry faces fresh protests over wages: Could supply chain disruptions benefit India?</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">LIVEMINT</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">TEXTILE</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Bangladesh's $40 billion garment industry faces fresh wage protests, raising questions over supply-chain disruption.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.thedailystar.net/business/economy/news/bangladesh-may-be-among-worlds-worst-cases-bank-fund-flight-4325741" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Bangladesh may be among world’s worst cases of bank fund flight</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE DAILY STAR</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">BANK</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Bangladesh may be among the worst cases in the world of money moved out of the banking sector, according to the adviser to a central bank taskforce formed to recover laundered assets.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://www.thedailystar.net/business/news/marubeni-weighs-investment-sugar-mills-4325571" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Marubeni weighs investment in sugar mills</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE DAILY STAR</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">FOODALLIED</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Japanese trading company Marubeni Protechs Corporation is exploring a major investment in Bangladesh’s sugar industry, including three modern sugar mills, a distillery and facilities to improve sugarcane production.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxPNHpydWZMcmRQR0RaQ2VJellqTVBmbHBMOGRzcmtqNXQ2LXdQVE8tWEpzMUlEaHFjemREcUFTRUxSTXUxb0hJSEFUZmRGN3AyMWV2S0hRTE9wQ0k2Q3Rid2N6ZThvWmVKYmlmcC0yWG9lQkFtMzI2STcyMnQwZ2ZzdEdjczE0Q04wZm8zQkliaEppRm5mWUdad01FZXBIMjZmRHhQNVhVaEdYRm9IaGxIdjFpaVlObFRGaG5YYkI3MA?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Major anarchy prevails in insurance sector like banking sector: Finance Minister</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE FINANCIAL EXPRESS</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">INSURANCE</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Major anarchy prevails in insurance sector like banking sector: Finance Minister</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE82Yng1V0taczB1aEJRUWtGd3hjN245cGNoUzhFMGdDSEpncDVHSFJsdlMtUnNjc2tIdWsyZUhBLUpFRWtSVGk2Y1ZNT0NtbWdENklKdE9JSDU0QQ?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Bangladesh’s apparel exports to UK rise 6.92pc in July-October</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">BANGLADESH SANGBAD SANGSTHA (BSS)</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">TEXTILE</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Bangladesh's apparel exports to the UK rose 6.92% in July-October.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE0zQW53RlVQNzh5UDVwNkZkMVM0OWtna3lldlYwTGpxTXhoZk5DXzJrWHd1QjlCbUtEOU5PM09JWEhWZDQ5YW8zRUdvaVRaVjg0Yjk4?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Ship recycling industry to get approvals within 5-10 days under one-stop service</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">BANGLADESH SANGBAD SANGSTHA (BSS)</span>
+          <br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">The ship recycling industry will get regulatory approvals within 5-10 days under a new one-stop service.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTFA4ZkVab1lUWHhQQ1doOUJlRm9WejVTOUtXRUdfdkUzcEJPT1dXQTd0Y0t0TndrMXRZbE1HSndxemlOUHlvd215bTUtTGJaR2RhQjNj?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Bangladesh's footwear exports grow 9.37pc in four months</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">BANGLADESH SANGBAD SANGSTHA (BSS)</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">TANNERY</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Bangladesh's footwear exports grew 9.37% over four months.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMingFBVV95cUxPZjNtSjViTTh1OHVTc2JTOXlROWlEalpGcTVhTGVLY0JfdmpqdjVUMDY2T1JLUWhzekMxNHliZFNQdXF5OVZOb21NbU1IQ2l5WlpUZHpiYnVRZHc2SkZEMXUwMGxva3hmdVZmenM0SlE3bTFVMDdqcDhPbm1VT1RZMzJIcXlzZ2lSMUl6dXJ4eEtlOXlCN0Rsc1dEM0s4dw?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Apparel sector lifts industrial growth to 8.79pc in Aug</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE FINANCIAL EXPRESS</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">TEXTILE</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">The apparel sector lifted overall industrial growth to 8.79% in August.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:12px 22px 2px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td width="16" valign="top" style="color:#FB8B1E;font-size:14px;font-family:Arial,sans-serif;">&#9656;</td>
+        <td>
+          <a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxOV1k4akxBSE03enNkdTRSR0M2V1VLSk5CN3J3SVNIZXUyV2FBM3lsajAzLVBpUmtaWmVJem1rbjhocVJfZDNwVWlCQmQ2TGtSVVc4UzJTbkc4N01ZNGVPQTdHN3FQcVAzR3Z1aVJ1M2t1am04R2E5V281YW53VThoZTh0RXNQRTVDaVhOUUxB?oc=5" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;line-height:1.35;">Bangladesh loses ground in EU apparel market</a><br>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;">THE FINANCIAL EXPRESS</span>
+          <span style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#FB8B1E;border:1px solid #FB8B1E;padding:0 5px;letter-spacing:1px;">TEXTILE</span><br>
+          <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#A8B0BD;line-height:1.5;">Bangladesh is losing ground in the EU apparel market.</span>
+        </td>
+      </tr></table>
+    </td></tr>
+
+  <!-- FOOTER -->
+  <tr><td style="padding:26px 22px 8px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td height="1" bgcolor="#232833" style="font-size:0;line-height:0;">&nbsp;</td></tr></table>
+    <p style="font-family:'Courier New',Consolas,monospace;font-size:10px;color:#6B7280;letter-spacing:1px;line-height:1.7;margin:12px 0 0;">
+      COMPILED&nbsp;AUTOMATICALLY&nbsp;·&nbsp;MORNING BRIEF&nbsp;·&nbsp;2026-11-17&nbsp;(ASIA/DHAKA)<br>
+      SOURCES:&nbsp;TBS&nbsp;·&nbsp;DAILY&nbsp;STAR&nbsp;·&nbsp;FINANCIAL&nbsp;EXPRESS&nbsp;·&nbsp;DHAKA&nbsp;TRIBUNE&nbsp;·&nbsp;BUSINESS&nbsp;POST&nbsp;·&nbsp;NEW&nbsp;AGE&nbsp;·&nbsp;BSS&nbsp;·&nbsp;DSE&nbsp;·&nbsp;BB&nbsp;·&nbsp;BSEC<br>
+      FOR&nbsp;INFORMATION&nbsp;ONLY&nbsp;—&nbsp;NOT&nbsp;INVESTMENT&nbsp;ADVICE
+    </p>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>
